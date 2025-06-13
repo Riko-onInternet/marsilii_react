@@ -7,7 +7,7 @@ import Hero from "@/components/hero";
 import { Button } from "@heroui/react";
 
 // Icons
-import { Lock, Award, Clock3 } from "lucide-react";
+import { Lock, Award, Clock3, MapPin, Phone, Mail } from "lucide-react";
 
 // ------ Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -50,32 +50,53 @@ const swiperContent = [
   {
     title: "Linea Zelo",
     desc: "La porta con serratura a chiusura automatica. Un progetto che realizza l’integrazione fra porta e architettura d’interni.",
-    src: "/img/bannerestro.jpg",
+    src: "/img/02_Modello-Zelo-Boiserie_Vista_02_05_.jpg",
     href: "/linea-estro/",
   },
   {
     title: "Linea Custos",
     desc: "Perfettamente complanare alla parete, Custos offre la possibilità di apertura a tirare o a spingere, garantendo la massima libertà progettuale.",
-    src: "/img/bannerestro.jpg",
+    src: "/img/05_Custos_Esterno_Vista_02_04_.jpg",
     href: "/linea-estro/",
   },
   {
     title: "Linea Marsilii",
-    desc: "La porta complanare Marsilii con cerniere a scomparsa e serratura a chiusura automatica",
-    src: "/img/bannerestro.jpg",
+    desc: "Un progetto che realizza l’integrazione fra porta e pareti: una sintesi sempre più esclusiva fra elementi d’arredo e architettura d’internia",
+    src: "/img/04_Modello_Classico_Marsilii_Vista_04_01_.jpg",
     href: "/linea-estro/",
   },
   {
     title: "Porte Vetrate",
-    desc: "La porta complanare Marsilii con cerniere a scomparsa e serratura a chiusura automatica",
-    src: "/img/bannerestro.jpg",
+    desc: "La scelta del vetro è indicata per chi necessita della sicurezza di una porta blindata senza dover rinunciare alla luce solare",
+    src: "/img/Porta_Corretta_02_.jpg",
     href: "/linea-estro/",
   },
   {
     title: "Tagliafuoco EI 120",
-    desc: "La porta complanare Marsilii con cerniere a scomparsa e serratura a chiusura automatica",
-    src: "/img/bannerestro.jpg",
+    desc: "Resistenza al fuoco EI 120. Porta isolata con 4 materiali diversi tutti specifici per la resistenza al fuoco.",
+    src: "/img/03_Modello_Estro_Vista_03b_02_.jpg",
     href: "/linea-estro/",
+  },
+];
+
+const contact = [
+  {
+    icon: MapPin,
+    title: "Indirizzo",
+    description:
+      "Via Salara Vecchia, 136 - 65129 Pescara (PE)",
+  },
+  {
+    icon: Phone,
+    title: "Telefono",
+    description:
+      "085 8624773",
+  },
+  {
+    icon: Mail,
+    title: "Email",
+    description:
+      "info@marsiliiserrature.it",
   },
 ];
 
@@ -102,6 +123,8 @@ export default function Home() {
           </Button>
         </div>
       </Hero>
+
+      {/* Perché Scegliere Marsilii */}
       <div className="py-16 flex flex-col items-center gap-16 px-4">
         {/* Titolo */}
         <div className="text-center flex flex-col gap-4">
@@ -127,6 +150,8 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* L'esperienza di Franco Marsilii [...] */}
       <div className="pt-8 pb-16 flex flex-col lg:flex-row items-center justify-between gap-4 px-4 lg:px-0 lg:pl-4">
         <div className="flex flex-col items-start gap-9 w-full">
           <div className="md:max-w-[600px] mx-auto">
@@ -164,10 +189,12 @@ export default function Home() {
           }}
         />
       </div>
+
+      {/* Le nostre linee */}
       <div className="flex flex-col gap-8">
         <div className="w-full flex flex-col items-center text-center gap-4">
           <p className="font-medium text-3xl text-black">Le nostre linee</p>
-          <p className="font-light text-lg text-black opacity-70">
+          <p className="font-light text-lg text-black">
             Soluzioni specializzate per ogni settore di applicazione
           </p>
         </div>
@@ -179,16 +206,17 @@ export default function Home() {
               clickable: true,
             }}
             navigation={true}
+            loop={true}
             modules={[Pagination, Navigation]}
             className="!px-20 !pb-12"
           >
             {swiperContent.map((item, index) => (
               <SwiperSlide
                 key={index}
-                className="aspect-square bg-center bg-no-repeat bg-cover"
+                className="aspect-square bg-center bg-no-repeat bg-cover select-none"
                 style={{ backgroundImage: `url(${item.src})` }}
               >
-                <div className="absolute bottom-0 left-0 w-full backdrop-blur-md flex flex-col gap-3 p-6">
+                <div className="absolute bottom-0 left-0 w-full backdrop-blur-md bg-white/40 flex flex-col gap-3 p-6">
                   <p className="text-black font-medium text-xl">{item.title}</p>
                   <p className="text-black text-sm font-light">{item.desc}</p>
                   <Link
@@ -207,12 +235,39 @@ export default function Home() {
             className="text-[var(--marsilii-primary)] border-[var(--marsilii-primary)] font-light"
             radius="md"
             variant="bordered"
+            onPress={() => {
+              window.location.href = "/linee";
+            }}
           >
             Scopri tutte le linee
           </Button>
         </div>
       </div>
-      <div className="h-[1000px] w-[10px] bg-gray-500" />
+
+      {/* Contattaci */}
+      <div className="py-8 px-6 flex flex-col items-center justify-center gap-8 bg-[var(--marsilii-background-secondary)] mt-8">
+        <div className="text-center flex flex-col gap-4">
+          <p className="text-3xl font-semibold">Contattaci</p>
+          <p className="text-lg">
+            Siamo a tua disposizione per qualsiasi informazione sui nostri
+            prodotti
+          </p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-20 sm:gap-4 items-center sm:items-start justify-between max-w-[1000px] w-full">
+          {contact.map((card, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center max-w-[300px] w-full gap-4"
+            >
+              <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center">
+                <card.icon size={32} />
+              </div>
+              <p className="font-semibold text-center text-xl">{card.title}</p>
+              <p className="text-center">{card.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
