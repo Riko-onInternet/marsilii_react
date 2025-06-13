@@ -117,6 +117,7 @@ export default function Header() {
                       <Link
                         href={link.href}
                         className="bg-transparent hover:bg-[var(--marsilii-background-secondary)] transition-all duration-200 w-full block px-4 py-2"
+                        onClick={() => onOpenChangeDrawerMenu()}
                       >
                         {link.name}
                       </Link>
