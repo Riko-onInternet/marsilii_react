@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --marsilii-primary: #101828;
+  --marsilii-background: #fff;
+  --marsilii-background-secondary: #F3F4F6;
+}
+
+body {
+  font-family: "Test Sohne", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: black !important;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--marsilii-primary) !important;
+}
+
+.swiper-button-prev, .swiper-button-next {
+  color: var(--marsilii-primary) !important;
+}
