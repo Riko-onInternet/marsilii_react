@@ -59,7 +59,7 @@ export default function About() {
   return (
     <div>
       <Hero
-        title="Chi Siamo"
+        title="Contatti"
         subtitle="Siamo a vostra disposizione per fornire consulenza specializzata e supporto tecnico per tutte le vostre esigenze di sicurezza"
         size="sm"
       />
