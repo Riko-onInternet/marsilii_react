@@ -24,70 +24,199 @@ export const productCategories: ProductCategory[] = [
     description: "Soluzioni di sicurezza per abitazioni private con tecnologie all'avanguardia",
     icon: "🏠",
     products: [
+      // Porte Estro (A1)
       {
         id: "porta-estro",
-        name: "Porta Estro",
-        description: "Porta blindata Classe 4 con design moderno e massima sicurezza",
+        name: "Porta Blindata Linea Estro",
+        description: "Porta blindata Classe RC4 con serratura a chiusura automatica meccanica brevettata. Controtelaio in acciaio zincato 25/10, telaio in doppia lamiera zincata 20/10, anta mobile con pannelli pressopiegati e 3 rinforzi omega.",
         category: "porte-blindate-civili",
-        image: "/img/bannerestro.jpg",
-        specifications: ["Classe 4", "Design moderno", "Chiusura automatica"],
-        certifications: ["Certificata Classe 4"],
+        image: "/img/products/a/A1/Estro.jpg",
+        specifications: [
+          "Classe di Resistenza Effrazione RC4",
+          "Cerniere a scomparsa autosollevanti",
+          "Serratura a chiusura automatica meccanica brevettata",
+          "Defender di sicurezza in acciaio inox monoblocco",
+          "Maniglia Marsilii a martellina",
+          "Pannello interno ed esterno laminato 7mm",
+          "Carter a vista lato interno",
+          "Soglia mobile inclinata antidrip",
+          "Profilo anti-scardinamento lato cerniera",
+          "Serratura a fascia a tutta altezza",
+          "Parafreddo mod. ANTIDRIP",
+          "Doppia tenuta perimetrale con guarnizione EPDM"
+        ],
+        certifications: [
+          "Classe di Resistenza Effrazione RC4",
+          "Permeabilità all'Aria CLASSE 2",
+          "Permeabilità all'Acqua CLASSE 3A",
+          "Permeabilità al vento CLASSE C3",
+          "Trasmittanza Termica U = 1.39 W/mqK"
+        ],
         slug: "porta-estro"
       },
+      // Porte Estro Zelo (A2)
       {
         id: "porta-estro-zelo",
-        name: "Porta Estro Finitura Zelo",
-        description: "Porta blindata Classe 4 con finitura Zelo per un'estetica raffinata",
+        name: "Porta Blindata Linea Estro - Finitura Zelo",
+        description: "Porta blindata Classe RC4 con finitura Zelo per un'estetica raffinata. Pannello interno in MDF laccato opaco nei colori RAL e carter a scomparsa lato interno per una finitura di pregio.",
         category: "porte-blindate-civili",
-        image: "/img/02_Modello-Zelo-Boiserie_Vista_02_05_.jpg",
-        specifications: ["Classe 4", "Finitura Zelo", "Estetica raffinata"],
-        certifications: ["Certificata Classe 4"],
+        image: "/img/products/a/A2/Zelo.png",
+        specifications: [
+          "Classe di Resistenza Effrazione RC4",
+          "Cerniere a scomparsa autosollevanti",
+          "Serratura a chiusura automatica meccanica brevettata",
+          "Defender di sicurezza in acciaio inox monoblocco",
+          "Maniglia Marsilii a martellina",
+          "Pannello esterno laminato 7mm",
+          "Pannello interno in MDF laccato opaco RAL",
+          "Carter a scomparsa lato interno",
+          "Soglia mobile inclinata antidrip",
+          "Profilo anti-scardinamento lato cerniera",
+          "Serratura a fascia a tutta altezza",
+          "Montaggio Filomuro disponibile",
+          "Maniglia rotativa push e scorrevole opzionali"
+        ],
+        certifications: [
+          "Classe di Resistenza Effrazione RC4",
+          "Permeabilità all'Aria CLASSE 2",
+          "Permeabilità all'Acqua CLASSE 3A",
+          "Permeabilità al vento CLASSE C3",
+          "Trasmittanza Termica U = 1.39 W/mqK"
+        ],
         slug: "porta-estro-zelo"
       },
+      // Porte Zelo Marsilii (A3)
       {
         id: "porta-zelo-marsilii",
-        name: "Porta Zelo Marsilii",
-        description: "Porta blindata in attesa di certificazione Classe 5",
+        name: "Porta Blindata Linea Estro - Finitura Zelo Marsilii",
+        description: "Porta blindata con resistenza extra dell'anta e piastre anti-mola tra scocca e coperchio. Struttura interna rinforzata, in attesa di certificazione Classe 5.",
         category: "porte-blindate-civili",
-        image: "/img/02_Modello-Zelo-Boiserie_Vista_07_01_.jpg",
-        specifications: ["In attesa certificazione Classe 5", "Tecnologia Marsilii"],
-        certifications: ["In attesa di certificazione Classe 5"],
+        image: "/img/products/a/A3/Zelo_Marsilii.png",
+        specifications: [
+          "In attesa di certificazione Classe 5",
+          "Struttura interna rinforzata da piastre anti-mola",
+          "Cerniere a scomparsa autosollevanti",
+          "Serratura a chiusura automatica meccanica brevettata",
+          "Defender di sicurezza in acciaio inox monoblocco",
+          "Maniglia Marsilii a martellina",
+          "Pannello esterno laminato 7mm",
+          "Pannello interno in MDF laccato opaco RAL",
+          "Carter a scomparsa lato interno",
+          "Resistenza extra con piastre anti-mola",
+          "Soglia mobile inclinata antidrip",
+          "Profilo anti-scardinamento lato cerniera",
+          "Montaggio Filomuro disponibile"
+        ],
+        certifications: [
+          "In attesa di certificazione Classe 5"
+        ],
         slug: "porta-zelo-marsilii"
       },
+      // Porte Tagliafuoco (A4)
       {
         id: "porta-ei120-tagliafuoco",
-        name: "Porta EI-120 Tagliafuoco Blindata",
-        description: "Porta blindata certificata Classe 4 e REI 120 per massima protezione",
+        name: "Porta Blindata Tagliafuoco EI-120",
+        description: "Porta blindata con resistenza al fuoco EI 120 omologata. Basata sulla struttura Estro maggiorata con materiali idonei alla resistenza al fuoco. Disponibile con cerniere a vista e a scomparsa.",
         category: "porte-blindate-civili",
-        image: "/img/03_Modello_Estro_Vista_03b_02_.jpg",
-        specifications: ["Classe 4", "REI 120", "Resistenza al fuoco"],
-        certifications: ["Certificata Classe 4", "REI 120"],
+        image: "/img/products/a/A4/Tagliafuoco.jpg",
+        specifications: [
+          "Resistenza al fuoco EI 120",
+          "Struttura basata su porta Estro maggiorata",
+          "Disponibile con cerniere a vista e a scomparsa",
+          "Finitura interna priva di parti metalliche a vista",
+          "Controtelaio in acciaio 25/10",
+          "Telaio in doppia lamiera 20/10",
+          "Anta con pannelli pressopiegati rinforzati",
+          "Materiali certificati per resistenza al fuoco",
+          "Adatta per ambienti di pregio"
+        ],
+        certifications: [
+          "Resistenza al Fuoco EI 120 Omologata",
+          "Certificazione antincendio"
+        ],
         slug: "porta-ei120-tagliafuoco"
       },
+      // Porte Satus (A5)
       {
         id: "porta-satus",
-        name: "Porta Satus",
-        description: "Porta blindata in attesa di certificazione Classe 4",
+        name: "Porta Blindata Linea Satus",
+        description: "Porta bi-lamiera con cerniere a vista, doppia battuta e doppia guarnizione di tenuta. Telaio in lamiera inox 15/10 e anta con pannelli zincati 10/10.",
         category: "porte-blindate-civili",
-        specifications: ["In attesa certificazione Classe 4"],
-        certifications: ["In attesa di certificazione Classe 4"],
+        image: "/img/products/a/A5/Porta_Satus.png",
+        specifications: [
+          "Classe Effrazione RC4 (in via di certificazione)",
+          "Porta bi-lamiera con doppia battuta",
+          "Cerniere a vista autosollevanti",
+          "Telaio in lamiera inox 15/10",
+          "Anta con pannelli zincati 10/10",
+          "3 rinforzi profilo omega in lamiera 20/10",
+          "Serratura a chiusura automatica meccanica",
+          "Defender di sicurezza in acciaio inox",
+          "Maniglia classica oro o argento",
+          "Pannelli laminati 7mm interni ed esterni",
+          "Assenza mostre lato interno",
+          "Soglia mobile inclinata antidrip",
+          "Profilo anti-scardinamento lato cerniera"
+        ],
+        certifications: [
+          "Classe Effrazione RC4 (in via di certificazione)",
+          "Acustica 42 Db (in via di certificazione)",
+          "Permeabilità Aria Classe 3 (in via di certificazione)",
+          "Resistenza Vento 5C (in via di certificazione)",
+          "Trasmittanza Termica Ud = 1.37 W/mqK (MDF 6mm)",
+          "Trasmittanza Termica Ud = 1.11 W/mqK (Compensato Marino 15mm)"
+        ],
         slug: "porta-satus"
       },
+      // Porte Custos (A6)
       {
         id: "porta-custos",
-        name: "Porta Custos",
-        description: "Porta blindata adatta per le ristrutturazioni",
+        name: "Porta Blindata Linea Custos",
+        description: "Porta blindata per ristrutturazioni con serratura a chiusura automatica CUSTOS. Assenza di controtelaio, telaio saldato direttamente alla parete. Funzione antipanico integrata.",
         category: "porte-blindate-civili",
-        image: "/img/05_Custos_Esterno_Vista_02_04_.jpg",
-        specifications: ["Adatta per ristrutturazioni", "Installazione facilitata"],
+        image: "/img/products/a/A6/Custos.jpg",
+        specifications: [
+          "Assenza di controtelaio",
+          "Telaio saldato direttamente alla parete",
+          "Telaio in doppia lamiera sagomata 25/10",
+          "Anta con pannelli pressopiegati 20/10",
+          "Rinforzi in tubolare 60x30 a cancellata",
+          "Serratura a chiusura automatica CUSTOS",
+          "Chiusura automatica meccanica ad ogni accostamento",
+          "Funzione antipanico (apertura interna senza chiave)",
+          "Dispositivo anti-inceppamento",
+          "Cerniere registrabili autolubrificanti",
+          "Apertura porta a 180°",
+          "Montaggio anta senza sollevamento",
+          "Vincolo antistrappo lato cerniere",
+          "Pannello esterno laminato 7mm",
+          "Pannello interno laccato opaco RAL"
+        ],
+        certifications: [
+          "Porta non certificata"
+        ],
         slug: "porta-custos"
       },
+      // Persiane Vetrate (A7)
       {
         id: "grate-persiane-vetrate",
         name: "Grate, Persiane e Vetrate Blindate",
-        description: "Soluzioni blindate fisse, apribili e su misura",
+        description: "Soluzioni blindate fisse e apribili. Grate con tubo ø35 e tondo ø20 rullante, persiane con lamelle presso-piegate, vetrate con vetro antisfondamento. Serratura a chiusura automatica meccanica.",
+        image: "/img/products/a/A7/Grate.jpg",
         category: "porte-blindate-civili",
-        specifications: ["Fisse", "Apribili", "Su misura"],
+        specifications: [
+          "Grate con tubo diametro 35mm",
+          "Tondo diametro 20mm rullante",
+          "Persiane con lamelle fisse presso-piegate",
+          "Materiale in acciaio inox",
+          "Verniciatura a fuoco colori RAL",
+          "Fissaggio con perni pieni o ancoraggio chimico",
+          "Variante con vetro antisfondamento",
+          "Intercapedine d'aria per ventilazione",
+          "Serratura a chiusura automatica meccanica",
+          "Versioni fisse e apribili",
+          "Realizzazione su misura"
+        ],
         slug: "grate-persiane-vetrate"
       }
     ]
@@ -181,7 +310,7 @@ export const productCategories: ProductCategory[] = [
       {
         id: "inferiate-sicurezza",
         name: "Inferiate di Sicurezza Penitenziaria",
-        description: "Grate antiseghetto per massima sicurezza",
+        description: "Grateantiseghetto per massima sicurezza",
         category: "infissi-arredi-carcerari",
         specifications: ["Antiseghetto"],
         slug: "inferiate-sicurezza"

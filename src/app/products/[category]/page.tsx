@@ -115,7 +115,7 @@ export default function CategoryPage() {
                     <div className="mb-4">
                       <h4 className="font-medium text-sm text-gray-700 mb-2">Certificazioni:</h4>
                       <div className="flex flex-wrap gap-1">
-                        {product.certifications.map((cert, index) => (
+                        {product.certifications.slice(0, 2).map((cert, index) => (
                           <span
                             key={index}
                             className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
@@ -123,6 +123,11 @@ export default function CategoryPage() {
                             {cert}
                           </span>
                         ))}
+                        {product.certifications.length > 2 && (
+                          <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                            +{product.certifications.length - 2} certificati
+                          </span>
+                        )}
                       </div>
                     </div>
                   )}

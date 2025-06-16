@@ -12,9 +12,9 @@ export default function ProductDetailPage() {
   const params = useParams();
   const categoryId = params.category as string;
   const productSlug = params.product as string;
-  
+
   const product = getProductBySlug(productSlug);
-  const category = productCategories.find(cat => cat.id === categoryId);
+  const category = productCategories.find((cat) => cat.id === categoryId);
 
   if (!product || !category) {
     return (
@@ -49,15 +49,23 @@ export default function ProductDetailPage() {
       <div className="py-6 px-4 bg-[var(--marsilii-background-secondary)]">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/products" className="hover:text-[var(--marsilii-primary)]">
+            <Link
+              href="/products"
+              className="hover:text-[var(--marsilii-primary)]"
+            >
               Prodotti
             </Link>
             <span>/</span>
-            <Link href={`/products/${categoryId}`} className="hover:text-[var(--marsilii-primary)]">
+            <Link
+              href={`/products/${categoryId}`}
+              className="hover:text-[var(--marsilii-primary)]"
+            >
               {category.name}
             </Link>
             <span>/</span>
-            <span className="text-[var(--marsilii-primary)] font-medium">{product.name}</span>
+            <span className="text-[var(--marsilii-primary)] font-medium">
+              {product.name}
+            </span>
           </div>
           <div className="mt-4">
             <Link href={`/products/${categoryId}`}>
@@ -105,11 +113,11 @@ export default function ProductDetailPage() {
                   {category.name}
                 </span>
               </div>
-              
+
               <h1 className="text-3xl font-bold text-[var(--marsilii-primary)] mb-4">
                 {product.name}
               </h1>
-              
+
               <p className="text-lg text-gray-600 mb-8">
                 {product.description}
               </p>
@@ -125,7 +133,7 @@ export default function ProductDetailPage() {
                     {product.specifications.map((spec, index) => (
                       <div key={index} className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-[var(--marsilii-primary)] rounded-full"></div>
-                        <span className="text-gray-700">{spec}</span>
+                        <span className="text-gray-700 w-full">{spec}</span>
                       </div>
                     ))}
                   </div>
@@ -186,30 +194,42 @@ export default function ProductDetailPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <Shield className="mx-auto mb-4 text-[var(--marsilii-primary)]" size={48} />
+              <Shield
+                className="mx-auto mb-4 text-[var(--marsilii-primary)]"
+                size={48}
+              />
               <h3 className="text-xl font-semibold text-[var(--marsilii-primary)] mb-2">
                 Garanzia Qualità
               </h3>
               <p className="text-gray-600">
-                Tutti i nostri prodotti sono coperti da garanzia e realizzati secondo i più alti standard di qualità
+                Tutti i nostri prodotti sono coperti da garanzia e realizzati
+                secondo i più alti standard di qualità
               </p>
             </div>
             <div className="text-center">
-              <Settings className="mx-auto mb-4 text-[var(--marsilii-primary)]" size={48} />
+              <Settings
+                className="mx-auto mb-4 text-[var(--marsilii-primary)]"
+                size={48}
+              />
               <h3 className="text-xl font-semibold text-[var(--marsilii-primary)] mb-2">
                 Installazione Professionale
               </h3>
               <p className="text-gray-600">
-                Il nostro team di tecnici specializzati garantisce un&apos;installazione perfetta e sicura
+                Il nostro team di tecnici specializzati garantisce
+                un&apos;installazione perfetta e sicura
               </p>
             </div>
             <div className="text-center">
-              <Phone className="mx-auto mb-4 text-[var(--marsilii-primary)]" size={48} />
+              <Phone
+                className="mx-auto mb-4 text-[var(--marsilii-primary)]"
+                size={48}
+              />
               <h3 className="text-xl font-semibold text-[var(--marsilii-primary)] mb-2">
                 Assistenza Post-Vendita
               </h3>
               <p className="text-gray-600">
-                Supporto tecnico continuo e servizio di manutenzione per garantire prestazioni ottimali
+                Supporto tecnico continuo e servizio di manutenzione per
+                garantire prestazioni ottimali
               </p>
             </div>
           </div>
@@ -224,7 +244,7 @@ export default function ProductDetailPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {category.products
-              .filter(p => p.id !== product.id)
+              .filter((p) => p.id !== product.id)
               .slice(0, 3)
               .map((relatedProduct) => (
                 <div
@@ -248,7 +268,9 @@ export default function ProductDetailPage() {
                     <p className="text-gray-600 text-sm mb-3">
                       {relatedProduct.description}
                     </p>
-                    <Link href={`/products/${categoryId}/${relatedProduct.slug}`}>
+                    <Link
+                      href={`/products/${categoryId}/${relatedProduct.slug}`}
+                    >
                       <Button
                         className="w-full text-[var(--marsilii-primary)] border-[var(--marsilii-primary)] font-light"
                         variant="bordered"
@@ -262,7 +284,7 @@ export default function ProductDetailPage() {
                 </div>
               ))}
           </div>
-          
+
           <div className="text-center mt-8">
             <Link href={`/products/${categoryId}`}>
               <Button
