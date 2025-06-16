@@ -83,20 +83,17 @@ const contact = [
   {
     icon: MapPin,
     title: "Indirizzo",
-    description:
-      "Via Salara Vecchia, 136 - 65129 Pescara (PE)",
+    description: "Via Salara Vecchia, 136 - 65129 Pescara (PE)",
   },
   {
     icon: Phone,
     title: "Telefono",
-    description:
-      "085 8624773",
+    description: "085 8624773",
   },
   {
     icon: Mail,
     title: "Email",
-    description:
-      "info@marsiliiserrature.it",
+    description: "info@marsiliiserrature.it",
   },
 ];
 
@@ -200,15 +197,25 @@ export default function Home() {
         </div>
         <div>
           <Swiper
-            slidesPerView={3}
-            spaceBetween={100}
+            spaceBetween={50}
             pagination={{
               clickable: true,
             }}
             navigation={true}
             loop={true}
+            slidesPerView={1}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 80,
+              },
+              1200: {
+                slidesPerView: 3,
+                spaceBetween: 100,
+              },
+            }}
             modules={[Pagination, Navigation]}
-            className="!px-20 !pb-12"
+            className="!px-4 lg:!px-20 !pb-12 navigation-btn"
           >
             {swiperContent.map((item, index) => (
               <SwiperSlide
@@ -216,11 +223,15 @@ export default function Home() {
                 className="aspect-square bg-center bg-no-repeat bg-cover select-none"
                 style={{ backgroundImage: `url(${item.src})` }}
               >
-                <div className="absolute bottom-0 left-0 w-full backdrop-blur-md bg-white/40 flex flex-col gap-3 p-6">
-                  <p className="text-black font-medium text-xl">{item.title}</p>
-                  <p className="text-black text-sm font-light">{item.desc}</p>
+                <div className="absolute bottom-0 left-0 w-full backdrop-blur-md bg-white/40 flex flex-col gap-3 p-3 md:p-4 lg:p-6">
+                  <p className="text-black font-medium text-xl md:text-2xl">
+                    {item.title}
+                  </p>
+                  <p className="text-black text-xs md:text-sm font-light">
+                    {item.desc}
+                  </p>
                   <Link
-                    className="bg-[var(--marsilii-primary)] text-white font-light text-xs gap-0 py-2.5 rounded-xl flex items-center justify-center hover:opacity-90"
+                    className="bg-[var(--marsilii-primary)] text-white font-light text-xs md:text-sm gap-0 py-2.5 rounded-xl flex items-center justify-center hover:opacity-90"
                     href={item.href}
                   >
                     Vai alla linea

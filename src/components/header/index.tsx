@@ -21,7 +21,7 @@ const MenuLink = [
   },
   {
     name: "Prodotti",
-    href: "/prodotti",
+    href: "/products",
   },
   {
     name: "Brevetti",
