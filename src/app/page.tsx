@@ -7,9 +7,9 @@ import {
   Lock,
   Award,
   Clock3,
-  MapPin,
+  /* MapPin,
   Phone,
-  Mail,
+  Mail, */
   Shield,
   Zap,
 } from "lucide-react";
@@ -91,7 +91,7 @@ const swiperContent = [
   },
 ];
 
-const contact = [
+/* const contact = [
   {
     icon: MapPin,
     title: "Indirizzo",
@@ -107,7 +107,7 @@ const contact = [
     title: "Email",
     description: "info@marsiliiserrature.it",
   },
-];
+]; */
 
 // Nuovo array con i payoff d'impatto dell'azienda
 const companyPayoffs = [
@@ -145,7 +145,7 @@ export default function Home() {
   const lineeSectionRef = useRef(null);
   const benefitsSectionRef = useRef(null);
   const experienceSectionRef = useRef(null);
-  const contactSectionRef = useRef(null);
+  // const contactSectionRef = useRef(null);
 
   // Hook per rilevare quando gli elementi entrano nel viewport
   const lineesInView = useInView(lineeSectionRef, { once: true, amount: 0.2 });
@@ -157,10 +157,10 @@ export default function Home() {
     once: true,
     amount: 0.2,
   });
-  const contactInView = useInView(contactSectionRef, {
+  /* const contactInView = useInView(contactSectionRef, {
     once: true,
     amount: 0.2,
-  });
+  }); */
 
   return (
     <div>
@@ -363,7 +363,7 @@ export default function Home() {
       {/* L'esperienza di Franco Marsilii con animazioni */}
       <motion.div
         ref={experienceSectionRef}
-        className="pb-8 flex flex-col lg:flex-row items-center justify-between gap-4 px-4 lg:px-0 lg:pl-4"
+        className="flex flex-col lg:flex-row items-center justify-between gap-4 px-4 lg:px-0 lg:pl-4 py-8 mt-8 bg-[var(--marsilii-background-secondary)]"
         initial={{ opacity: 0 }}
         animate={experienceInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.8 }}
@@ -421,7 +421,7 @@ export default function Home() {
                     ? { y: 0, opacity: 1 }
                     : { y: 30, opacity: 0 }
                 }
-                transition={{ duration: 0.5, delay: 0.7 }}
+                transition={{ duration: 0.5 }}
                 whileHover={{ scale: 1.05 }}
               >
                 <Award />
@@ -452,7 +452,7 @@ export default function Home() {
       {/* Perché Scegliere Marsilii con animazioni */}
       <motion.div
         ref={benefitsSectionRef}
-        className="my-10 py-8 flex flex-col items-center gap-16 px-4 bg-[var(--marsilii-background-secondary)]"
+        className="my-10 py-8 flex flex-col items-center gap-16 px-4"
         initial={{ opacity: 0 }}
         animate={benefitsInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.8 }}
@@ -479,7 +479,7 @@ export default function Home() {
             animate={
               benefitsInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }
             }
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5 }}
           >
             <AccentedText
               text="La nostra esperienza e innovazione al servizio della tua sicurezza"
@@ -497,16 +497,16 @@ export default function Home() {
               animate={
                 benefitsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
               }
-              transition={{ duration: 0.5, delay: 0.2 * (index + 1) }}
+              transition={{ duration: 0.5 }}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
             >
               <motion.div
-                className="w-16 h-16 rounded-full bg-white flex items-center justify-center"
+                className="w-16 h-16 rounded-full bg-[var(--marsilii-background-secondary)] flex items-center justify-center"
                 whileHover={{
                   scale: 1.1,
                   boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
                 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                transition={{ type: "spring" }}
               >
                 <card.icon size={32} />
               </motion.div>
@@ -530,7 +530,7 @@ export default function Home() {
       </motion.div>
 
       {/* Contattaci con animazioni */}
-      <motion.div
+      {/* <motion.div
         ref={contactSectionRef}
         className="py-8 px-6 flex flex-col items-center justify-center gap-8 bg-[var(--marsilii-background-secondary)] mt-8"
         initial={{ opacity: 0, y: 50 }}
@@ -599,7 +599,7 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 }
