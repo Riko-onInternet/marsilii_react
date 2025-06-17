@@ -23,9 +23,12 @@ export default function ProductsPage() {
   const categoriesRef = useRef(null);
   const downloadRef = useRef(null);
   const ctaRef = useRef(null);
-  
+
   // Controllo quando gli elementi entrano nel viewport
-  const isCategoriesInView = useInView(categoriesRef, { once: true, amount: 0.2 });
+  const isCategoriesInView = useInView(categoriesRef, {
+    once: true,
+    amount: 0.2,
+  });
   const isDownloadInView = useInView(downloadRef, { once: true, amount: 0.2 });
   const isCtaInView = useInView(ctaRef, { once: true, amount: 0.3 });
 
@@ -36,9 +39,9 @@ export default function ProductsPage() {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        delayChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
@@ -46,16 +49,19 @@ export default function ProductsPage() {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.5 }
-    }
+      transition: { duration: 0.5 },
+    },
   };
 
   return (
     <div>
-      <Hero title="I Nostri Prodotti" subtitle="Scopri la gamma completa di soluzioni Marsilii" />
+      <Hero
+        title="I Nostri Prodotti"
+        subtitle="Scopri la gamma completa di soluzioni Marsilii"
+      />
 
       {/* Categorie di Prodotti */}
-      <motion.div 
+      <motion.div
         ref={categoriesRef}
         className="py-16 px-4"
         initial="hidden"
@@ -64,8 +70,8 @@ export default function ProductsPage() {
       >
         <div className="max-w-[1200px] mx-auto">
           {productCategories.map((category) => (
-            <motion.div 
-              key={category.id} 
+            <motion.div
+              key={category.id}
               className="mb-16"
               variants={itemVariants}
             >
@@ -108,7 +114,7 @@ export default function ProductsPage() {
               </div>
 
               <Swiper
-                spaceBetween={20}
+                spaceBetween={50}
                 slidesPerView={1}
                 navigation
                 pagination={{ clickable: true }}
@@ -116,22 +122,25 @@ export default function ProductsPage() {
                 breakpoints={{
                   640: {
                     slidesPerView: 2,
+                    spaceBetween: 80,
+
                   },
-                  1024: {
+                  1200: {
                     slidesPerView: 3,
+                    spaceBetween: 100,
                   },
                 }}
-                className="productSwiper"
+                className="!px-4 lg:!px-20 !pb-12 navigation-btn"
               >
                 {category.products.slice(0, 6).map((product) => (
                   <SwiperSlide key={product.id}>
-                    <motion.div 
+                    <motion.div
                       className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden h-full border border-gray-100"
                       whileHover={{ y: -5 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
                       {product.image && (
-                        <motion.div 
+                        <motion.div
                           className="relative h-40 bg-gray-100"
                           whileHover={{ scale: 1.05 }}
                           transition={{ duration: 0.3 }}
@@ -219,20 +228,20 @@ export default function ProductsPage() {
 
                 {/* Card "Vedi Tutti" */}
                 <SwiperSlide>
-                  <motion.div 
+                  <motion.div
                     className="bg-gradient-to-br from-[var(--marsilii-primary)] to-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden h-full flex items-center justify-center"
                     whileHover={{ scale: 1.03 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <div className="text-center p-6 text-white">
-                      <motion.div 
+                      <motion.div
                         className="text-4xl mb-4"
                         animate={{ rotate: [0, 10, 0] }}
                         transition={{ repeat: Infinity, duration: 2 }}
                       >
                         {category.icon}
                       </motion.div>
-                      <motion.h4 
+                      <motion.h4
                         className="text-xl font-semibold mb-3"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -240,7 +249,7 @@ export default function ProductsPage() {
                       >
                         Scopri Tutti i Prodotti
                       </motion.h4>
-                      <motion.p 
+                      <motion.p
                         className="text-sm mb-6 opacity-90"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -292,18 +301,22 @@ export default function ProductsPage() {
       </motion.div>
 
       {/* Sezione Download */}
-      <motion.div 
+      <motion.div
         ref={downloadRef}
         className="py-16 px-4 bg-[var(--marsilii-background-secondary)]"
         initial={{ opacity: 0, y: 30 }}
-        animate={isDownloadInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        animate={
+          isDownloadInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+        }
         transition={{ duration: 0.6 }}
       >
         <div className="max-w-[1200px] mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
-            animate={isDownloadInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            animate={
+              isDownloadInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+            }
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             <h2 className="text-3xl font-bold text-[var(--marsilii-primary)] mb-4">
@@ -320,7 +333,11 @@ export default function ProductsPage() {
                 key={doc.id}
                 className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-max"
                 initial={{ opacity: 0, y: 20 }}
-                animate={isDownloadInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                animate={
+                  isDownloadInView
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 20 }
+                }
                 transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
                 whileHover={{ y: -5 }}
               >
@@ -362,7 +379,7 @@ export default function ProductsPage() {
       </motion.div>
 
       {/* Call to Action */}
-      <motion.div 
+      <motion.div
         ref={ctaRef}
         className="py-16 px-4"
         initial={{ opacity: 0 }}
@@ -370,24 +387,28 @@ export default function ProductsPage() {
         transition={{ duration: 0.8 }}
       >
         <div className="max-w-[800px] mx-auto text-center">
-          <motion.h2 
+          <motion.h2
             className="text-3xl font-bold text-[var(--marsilii-primary)] mb-4"
             initial={{ opacity: 0, y: -20 }}
-            animate={isCtaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+            animate={
+              isCtaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }
+            }
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             Hai Bisogno di Consulenza?
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="text-lg text-gray-600 mb-8"
             initial={{ opacity: 0, y: -10 }}
-            animate={isCtaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+            animate={
+              isCtaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }
+            }
             transition={{ delay: 0.3, duration: 0.5 }}
           >
             I nostri esperti sono a disposizione per aiutarti a scegliere la
             soluzione più adatta alle tue esigenze
           </motion.p>
-          <motion.div 
+          <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={isCtaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}

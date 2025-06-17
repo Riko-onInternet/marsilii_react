@@ -9,6 +9,10 @@ import Image from "next/image";
 import { ArrowLeft, Eye } from "lucide-react";
 import AccentedText from "@/components/AccentedText";
 
+// Importazioni di Framer Motion
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+
 export default function CategoryPage() {
   const params = useParams();
   const categoryId = params.category as string;
@@ -16,10 +20,50 @@ export default function CategoryPage() {
   const category = productCategories.find((cat) => cat.id === categoryId);
   const products = getProductsByCategory(categoryId);
 
+  // Refs per le animazioni
+  const breadcrumbRef = useRef(null);
+  const productsHeaderRef = useRef(null);
+  const productsGridRef = useRef(null);
+  const ctaRef = useRef(null);
+
+  // Controllo quando gli elementi entrano nel viewport
+  const isBreadcrumbInView = useInView(breadcrumbRef, { once: true, amount: 0.2 });
+  const isProductsHeaderInView = useInView(productsHeaderRef, { once: true, amount: 0.2 });
+  const isProductsGridInView = useInView(productsGridRef, { once: true, amount: 0.1 });
+  const isCtaInView = useInView(ctaRef, { once: true, amount: 0.3 });
+
+  // Varianti per le animazioni
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   if (!category) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <h1 className="text-2xl font-bold text-[var(--marsilii-primary)] mb-4">
             <AccentedText
               text="Categoria non trovata"
@@ -39,7 +83,7 @@ export default function CategoryPage() {
               />
             </Button>
           </Link>
-        </div>
+        </motion.div>
       </div>
     );
   }
@@ -49,7 +93,13 @@ export default function CategoryPage() {
       <Hero title={category.name} subtitle={category.description} size="sm" />
 
       {/* Breadcrumb e Back Button */}
-      <div className="py-6 px-4 bg-[var(--marsilii-background-secondary)]">
+      <motion.div 
+        ref={breadcrumbRef}
+        className="py-6 px-4 bg-[var(--marsilii-background-secondary)]"
+        initial={{ opacity: 0, y: -20 }}
+        animate={isBreadcrumbInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <Breadcrumbs
             size="sm"
@@ -83,25 +133,36 @@ export default function CategoryPage() {
           </Breadcrumbs>
 
           <Link href="/products">
-            <Button
-              className="text-[var(--marsilii-primary)] font-light"
-              variant="light"
-              startContent={<ArrowLeft size={16} />}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <AccentedText
-                text="Torna alle Categorie"
-                baseWeight={300}
-                accentWeight={500}
-              />
-            </Button>
+              <Button
+                className="text-[var(--marsilii-primary)] font-light"
+                variant="light"
+                startContent={<ArrowLeft size={16} />}
+              >
+                <AccentedText
+                  text="Torna alle Categorie"
+                  baseWeight={300}
+                  accentWeight={500}
+                />
+              </Button>
+            </motion.div>
           </Link>
         </div>
-      </div>
+      </motion.div>
 
       {/* Lista Prodotti */}
       <div className="py-16 px-4">
         <div className="max-w-[1200px] mx-auto">
-          <div className="text-center mb-12">
+          <motion.div 
+            ref={productsHeaderRef}
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isProductsHeaderInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-3xl font-bold text-[var(--marsilii-primary)] mb-4">
               <AccentedText
                 text="Prodotti Disponibili"
@@ -116,22 +177,37 @@ export default function CategoryPage() {
                 accentWeight={500}
               />
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <div
+          <motion.div 
+            ref={productsGridRef}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isProductsGridInView ? "visible" : "hidden"}
+          >
+            {products.map((product, index) => (
+              <motion.div
                 key={product.id}
+                variants={itemVariants}
+                custom={index}
                 className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100"
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 {product.image && (
-                  <div className="relative h-48 bg-gray-100">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover"
-                    />
+                  <div className="relative h-48 bg-gray-100 overflow-hidden">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                      className="h-full w-full"
+                    >
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </motion.div>
                   </div>
                 )}
 
@@ -165,16 +241,18 @@ export default function CategoryPage() {
                           {product.specifications
                             .slice(0, 3)
                             .map((spec, index) => (
-                              <span
+                              <motion.span
                                 key={index}
                                 className="bg-[var(--marsilii-background-secondary)] text-xs px-2 py-1 rounded"
+                                whileHover={{ scale: 1.05, backgroundColor: "#f0f0f0" }}
+                                transition={{ duration: 0.2 }}
                               >
                                 <AccentedText
                                   text={`${spec}`}
                                   baseWeight={300}
                                   accentWeight={500}
                                 />
-                              </span>
+                              </motion.span>
                             ))}
                         </div>
                       </div>
@@ -194,19 +272,25 @@ export default function CategoryPage() {
                           {product.certifications
                             .slice(0, 2)
                             .map((cert, index) => (
-                              <span
+                              <motion.span
                                 key={index}
                                 className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
+                                whileHover={{ scale: 1.05, backgroundColor: "#d1fae5" }}
+                                transition={{ duration: 0.2 }}
                               >
                                 <AccentedText
                                   text={`${cert}`}
                                   baseWeight={300}
                                   accentWeight={500}
                                 />
-                              </span>
+                              </motion.span>
                             ))}
                           {product.certifications.length > 2 && (
-                            <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                            <motion.span 
+                              className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded"
+                              whileHover={{ scale: 1.05, backgroundColor: "#f3f4f6" }}
+                              transition={{ duration: 0.2 }}
+                            >
                               <AccentedText
                                 text={`+${
                                   product.certifications.length - 2
@@ -214,64 +298,98 @@ export default function CategoryPage() {
                                 baseWeight={300}
                                 accentWeight={500}
                               />
-                            </span>
+                            </motion.span>
                           )}
                         </div>
                       </div>
                     )}
 
                   <Link href={`/products/${categoryId}/${product.slug}`}>
-                    <Button
-                      className="w-full bg-[var(--marsilii-primary)] text-white font-light"
-                      radius="md"
-                      startContent={<Eye size={16} />}
+                    <motion.div
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
                     >
-                      <AccentedText
-                        text="Visualizza Dettagli"
-                        baseWeight={300}
-                        accentWeight={500}
-                      />
-                    </Button>
+                      <Button
+                        className="w-full bg-[var(--marsilii-primary)] text-white font-light"
+                        radius="md"
+                        startContent={<motion.div
+                          animate={{ x: [0, 3, 0] }}
+                          transition={{ repeat: Infinity, duration: 1.5, repeatType: "loop" }}
+                        >
+                          <Eye size={16} />
+                        </motion.div>}
+                      >
+                        <AccentedText
+                          text="Visualizza Dettagli"
+                          baseWeight={300}
+                          accentWeight={500}
+                        />
+                      </Button>
+                    </motion.div>
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Call to Action */}
-      <div className="py-16 px-4 bg-[var(--marsilii-background-secondary)]">
+      <motion.div 
+        ref={ctaRef}
+        className="py-16 px-4 bg-[var(--marsilii-background-secondary)]"
+        initial={{ opacity: 0 }}
+        animate={isCtaInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="max-w-[800px] mx-auto text-center">
-          <h2 className="text-2xl font-bold text-[var(--marsilii-primary)] mb-4">
+          <motion.h2 
+            className="text-2xl font-bold text-[var(--marsilii-primary)] mb-4"
+            initial={{ y: 30, opacity: 0 }}
+            animate={isCtaInView ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <AccentedText
               text="Interessato a questi prodotti?"
               baseWeight={600}
               accentWeight={800}
             />
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-gray-600 mb-8"
+            initial={{ y: 30, opacity: 0 }}
+            animate={isCtaInView ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
             <AccentedText
               text="Contattaci per ricevere informazioni dettagliate e preventivi personalizzati"
               baseWeight={300}
               accentWeight={500}
             />
-          </p>
-          <Link href="/contact">
-            <Button
-              className="bg-[var(--marsilii-primary)] text-white font-light"
-              radius="md"
-              size="lg"
-            >
-              <AccentedText
-                text="Richiedi Informazioni"
-                baseWeight={300}
-                accentWeight={500}
-              />
-            </Button>
-          </Link>
+          </motion.p>
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={isCtaInView ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link href="/contact">
+              <Button
+                className="bg-[var(--marsilii-primary)] text-white font-light"
+                radius="md"
+                size="lg"
+              >
+                <AccentedText
+                  text="Richiedi Informazioni"
+                  baseWeight={300}
+                  accentWeight={500}
+                />
+              </Button>
+            </Link>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
