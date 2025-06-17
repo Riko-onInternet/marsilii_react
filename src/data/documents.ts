@@ -10,63 +10,130 @@ export interface DownloadableDocument {
 }
 
 export const downloadableDocuments: DownloadableDocument[] = [
+  // Documenti A1 - Porta Estro
   {
-    id: "scheda-tecnica-porte-blindate",
-    name: "Scheda Tecnica Porte Blindate",
-    description: "Specifiche tecniche dettagliate per l'installazione e la manutenzione delle porte blindate Marsilii",
-    fileUrl: "/documents/scheda-tecnica-porte-blindate.pdf",
+    id: "permeabilita-aria-acqua-vento-a1",
+    name: "Permeabilità all'Aria, Tenuta All'Acqua e Resistenza al Vento",
+    description: "Certificazione delle prestazioni di permeabilità all'aria, tenuta all'acqua e resistenza al vento per la Porta Blindata Linea Estro",
+    fileUrl: "/doc/a1/Permeabilità allAria, Tenuta All_Acqua e Resistenza al vento 2017.pdf",
     category: "porte-blindate-civili",
-    fileSize: "2.4 MB",
-    fileType: "PDF",
-    lastUpdated: "2023-09-15"
-  },
-  {
-    id: "manuale-installazione-porte-estro",
-    name: "Manuale di Installazione Linea Estro",
-    description: "Guida passo-passo per l'installazione corretta delle porte blindate della linea Estro",
-    fileUrl: "/documents/manuale-installazione-estro.pdf",
-    category: "porte-blindate-civili",
-    fileSize: "3.1 MB",
-    fileType: "PDF",
-    lastUpdated: "2023-10-20"
-  },
-  {
-    id: "certificazioni-porte-blindate",
-    name: "Certificazioni e Normative",
-    description: "Documentazione completa sulle certificazioni di sicurezza e le normative rispettate dai prodotti Marsilii",
-    fileUrl: "/documents/certificazioni-porte-blindate.pdf",
-    category: "certificazioni",
     fileSize: "1.8 MB",
     fileType: "PDF",
-    lastUpdated: "2023-11-05"
+    lastUpdated: "2017"
   },
   {
-    id: "catalogo-prodotti-2023",
-    name: "Catalogo Prodotti 2023",
-    description: "Catalogo completo della gamma di prodotti Marsilii con specifiche tecniche e opzioni disponibili",
-    fileUrl: "/documents/catalogo-prodotti-2023.pdf",
-    fileSize: "5.2 MB",
-    fileType: "PDF",
-    lastUpdated: "2023-08-01"
-  },
-  {
-    id: "guida-manutenzione",
-    name: "Guida alla Manutenzione",
-    description: "Consigli e procedure per la corretta manutenzione dei prodotti Marsilii per garantirne la durata nel tempo",
-    fileUrl: "/documents/guida-manutenzione.pdf",
+    id: "potere-fonoisolante-a1",
+    name: "Potere Fonoisolante",
+    description: "Certificazione dell'isolamento acustico e del potere fonoisolante della Porta Blindata Linea Estro",
+    fileUrl: "/doc/a1/Potere Fonoisolante 2017.pdf",
+    category: "porte-blindate-civili",
     fileSize: "1.5 MB",
     fileType: "PDF",
-    lastUpdated: "2023-07-12"
+    lastUpdated: "2017"
   },
   {
-    id: "schemi-tecnici-serrature",
-    name: "Schemi Tecnici Serrature",
-    description: "Dettagli tecnici e schemi di montaggio per le serrature di sicurezza utilizzate nei prodotti Marsilii",
-    fileUrl: "/documents/schemi-tecnici-serrature.pdf",
-    category: "componenti",
+    id: "resistenza-fuoco-a1",
+    name: "Resistenza al Fuoco",
+    description: "Certificazione della resistenza al fuoco della Porta Blindata Linea Estro",
+    fileUrl: "/doc/a1/Resistenza a Fuoco.pdf",
+    category: "porte-blindate-civili",
+    fileSize: "1.6 MB",
+    fileType: "PDF",
+    lastUpdated: "2017"
+  },
+  {
+    id: "resistenza-azione-manuale-a1",
+    name: "Resistenza all'Azione Manuale",
+    description: "Certificazione della resistenza all'effrazione e all'azione manuale della Porta Blindata Linea Estro",
+    fileUrl: "/doc/a1/Resistenza all_Azione Manuale 2017.pdf",
+    category: "porte-blindate-civili",
+    fileSize: "1.7 MB",
+    fileType: "PDF",
+    lastUpdated: "2017"
+  },
+  {
+    id: "trasmittanza-termica-a1",
+    name: "Trasmittanza Termica",
+    description: "Certificazione dell'isolamento termico e della trasmittanza termica della Porta Blindata Linea Estro",
+    fileUrl: "/doc/a1/Trasmittanza Termica 2017.pdf",
+    category: "porte-blindate-civili",
+    fileSize: "1.4 MB",
+    fileType: "PDF",
+    lastUpdated: "2017"
+  },
+  
+  // Documenti A2 - Porta Estro Zelo
+  {
+    id: "permeabilita-aria-acqua-vento-a2",
+    name: "Permeabilità all'Aria, Tenuta All'Acqua e Resistenza al Vento - Zelo",
+    description: "Certificazione delle prestazioni di permeabilità all'aria, tenuta all'acqua e resistenza al vento per la Porta Blindata Linea Estro con finitura Zelo",
+    fileUrl: "/doc/a2/Permeabilità allAria, Tenuta All_Acqua e Resistenza al vento 2017.pdf",
+    category: "porte-blindate-civili",
+    fileSize: "1.8 MB",
+    fileType: "PDF",
+    lastUpdated: "2017"
+  },
+  {
+    id: "potere-fonoisolante-a2",
+    name: "Potere Fonoisolante - Zelo",
+    description: "Certificazione dell'isolamento acustico e del potere fonoisolante della Porta Blindata Linea Estro con finitura Zelo",
+    fileUrl: "/doc/a2/Potere Fonoisolante 2017.pdf",
+    category: "porte-blindate-civili",
+    fileSize: "1.5 MB",
+    fileType: "PDF",
+    lastUpdated: "2017"
+  },
+  {
+    id: "resistenza-fuoco-a2",
+    name: "Resistenza al Fuoco - Zelo",
+    description: "Certificazione della resistenza al fuoco della Porta Blindata Linea Estro con finitura Zelo",
+    fileUrl: "/doc/a2/Resistenza a Fuoco.pdf",
+    category: "porte-blindate-civili",
+    fileSize: "1.6 MB",
+    fileType: "PDF",
+    lastUpdated: "2017"
+  },
+  {
+    id: "resistenza-azione-manuale-a2",
+    name: "Resistenza all'Azione Manuale - Zelo",
+    description: "Certificazione della resistenza all'effrazione e all'azione manuale della Porta Blindata Linea Estro con finitura Zelo",
+    fileUrl: "/doc/a2/Resistenza all_Azione Manuale 2017.pdf",
+    category: "porte-blindate-civili",
+    fileSize: "1.7 MB",
+    fileType: "PDF",
+    lastUpdated: "2017"
+  },
+  {
+    id: "trasmittanza-termica-a2",
+    name: "Trasmittanza Termica - Zelo",
+    description: "Certificazione dell'isolamento termico e della trasmittanza termica della Porta Blindata Linea Estro con finitura Zelo",
+    fileUrl: "/doc/a2/Trasmittanza Termica 2017.pdf",
+    category: "porte-blindate-civili",
+    fileSize: "1.4 MB",
+    fileType: "PDF",
+    lastUpdated: "2017"
+  },
+  
+  // Documenti A3 - Porta Tagliafuoco EI-120
+  {
+    id: "omologazione-porta-ei120",
+    name: "Omologazione Porta EI 120",
+    description: "Certificato di omologazione della Porta Blindata Tagliafuoco con resistenza al fuoco EI 120",
+    fileUrl: "/doc/a3/OMOLOGAZIONE PORTA EI 120.pdf",
+    category: "porte-blindate-civili",
+    fileSize: "2.1 MB",
+    fileType: "PDF",
+    lastUpdated: "2020"
+  },
+  {
+    id: "rinnovo-omologazione-ei120",
+    name: "Rinnovo Omologazione EI 120",
+    description: "Documento di rinnovo della certificazione e omologazione della Porta Blindata Tagliafuoco EI 120",
+    fileUrl: "/doc/a3/Rinnovo omologazione EI120.pdf",
+    category: "porte-blindate-civili",
     fileSize: "1.9 MB",
     fileType: "PDF",
-    lastUpdated: "2023-09-30"
+    lastUpdated: "2022"
   }
 ];
 
