@@ -91,24 +91,6 @@ const swiperContent = [
   },
 ];
 
-/* const contact = [
-  {
-    icon: MapPin,
-    title: "Indirizzo",
-    description: "Via Salara Vecchia, 136 - 65129 Pescara (PE)",
-  },
-  {
-    icon: Phone,
-    title: "Telefono",
-    description: "085 8624773",
-  },
-  {
-    icon: Mail,
-    title: "Email",
-    description: "info@marsiliiserrature.it",
-  },
-]; */
-
 // Nuovo array con i payoff d'impatto dell'azienda
 const companyPayoffs = [
   {
@@ -145,7 +127,6 @@ export default function Home() {
   const lineeSectionRef = useRef(null);
   const benefitsSectionRef = useRef(null);
   const experienceSectionRef = useRef(null);
-  // const contactSectionRef = useRef(null);
 
   // Hook per rilevare quando gli elementi entrano nel viewport
   const lineesInView = useInView(lineeSectionRef, { once: true, amount: 0.2 });
@@ -157,10 +138,6 @@ export default function Home() {
     once: true,
     amount: 0.2,
   });
-  /* const contactInView = useInView(contactSectionRef, {
-    once: true,
-    amount: 0.2,
-  }); */
 
   return (
     <div>
@@ -528,78 +505,6 @@ export default function Home() {
           ))}
         </div>
       </motion.div>
-
-      {/* Contattaci con animazioni */}
-      {/* <motion.div
-        ref={contactSectionRef}
-        className="py-8 px-6 flex flex-col items-center justify-center gap-8 bg-[var(--marsilii-background-secondary)] mt-8"
-        initial={{ opacity: 0, y: 50 }}
-        animate={contactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="text-center flex flex-col gap-4">
-          <motion.p
-            className="text-3xl font-semibold"
-            initial={{ y: -20, opacity: 0 }}
-            animate={
-              contactInView ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }
-            }
-            transition={{ duration: 0.5 }}
-          >
-            Contattaci
-          </motion.p>
-          <motion.p
-            className="text-lg"
-            initial={{ y: 20, opacity: 0 }}
-            animate={
-              contactInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }
-            }
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            Siamo a tua disposizione per qualsiasi informazione sui nostri
-            prodotti
-          </motion.p>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-20 sm:gap-4 items-center sm:items-start justify-between max-w-[1000px] w-full">
-          {contact.map((card, index) => (
-            <motion.div
-              key={index}
-              className="flex flex-col items-center justify-center max-w-[300px] w-full gap-4"
-              initial={{ opacity: 0, y: 30 }}
-              animate={
-                contactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-              }
-              transition={{ duration: 0.5, delay: 0.3 * (index + 1) }}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
-            >
-              <motion.div
-                className="w-16 h-16 rounded-full bg-white flex items-center justify-center"
-                whileHover={{
-                  scale: 1.1,
-                  boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
-                }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <card.icon size={32} />
-              </motion.div>
-              <p className="font-semibold text-center text-xl">
-                <AccentedText
-                  text={card.title}
-                  baseWeight={600}
-                  accentWeight={800}
-                />
-              </p>
-              <p className="text-center">
-                <AccentedText
-                  text={card.description}
-                  baseWeight={300}
-                  accentWeight={500}
-                />
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div> */}
     </div>
   );
 }
