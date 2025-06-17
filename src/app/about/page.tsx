@@ -318,7 +318,7 @@ export default function About() {
           {strengths.map((strength, index) => (
             <motion.div 
               key={index}
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+              className="bg-white p-6 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100"
               variants={itemVariants}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
             >

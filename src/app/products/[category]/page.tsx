@@ -191,7 +191,7 @@ export default function CategoryPage() {
                 key={product.id}
                 variants={itemVariants}
                 custom={index}
-                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100"
+                className="bg-white shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 {product.image && (
@@ -243,7 +243,7 @@ export default function CategoryPage() {
                             .map((spec, index) => (
                               <motion.span
                                 key={index}
-                                className="bg-[var(--marsilii-background-secondary)] text-xs px-2 py-1 rounded"
+                                className="bg-[var(--marsilii-background-secondary)] text-xs px-2 py-1"
                                 whileHover={{ scale: 1.05, backgroundColor: "#f0f0f0" }}
                                 transition={{ duration: 0.2 }}
                               >
@@ -274,7 +274,7 @@ export default function CategoryPage() {
                             .map((cert, index) => (
                               <motion.span
                                 key={index}
-                                className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
+                                className="bg-green-100 text-green-800 text-xs px-2 py-1"
                                 whileHover={{ scale: 1.05, backgroundColor: "#d1fae5" }}
                                 transition={{ duration: 0.2 }}
                               >
@@ -287,7 +287,7 @@ export default function CategoryPage() {
                             ))}
                           {product.certifications.length > 2 && (
                             <motion.span 
-                              className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded"
+                              className="bg-gray-100 text-gray-600 text-xs px-2 py-1"
                               whileHover={{ scale: 1.05, backgroundColor: "#f3f4f6" }}
                               transition={{ duration: 0.2 }}
                             >

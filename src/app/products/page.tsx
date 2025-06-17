@@ -135,7 +135,7 @@ export default function ProductsPage() {
                 {category.products.slice(0, 6).map((product) => (
                   <SwiperSlide key={product.id}>
                     <motion.div
-                      className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden h-full border border-gray-100"
+                      className="bg-white shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden h-full border border-gray-100"
                       whileHover={{ y: -5 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
@@ -176,7 +176,7 @@ export default function ProductsPage() {
                                   .map((spec, index) => (
                                     <motion.span
                                       key={index}
-                                      className="bg-[var(--marsilii-background-secondary)] text-xs px-2 py-1 rounded"
+                                      className="bg-[var(--marsilii-background-secondary)] text-xs px-2 py-1"
                                       whileHover={{ scale: 1.05 }}
                                     >
                                       {spec}
@@ -196,7 +196,7 @@ export default function ProductsPage() {
                                   .map((cert, index) => (
                                     <motion.span
                                       key={index}
-                                      className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
+                                      className="bg-green-100 text-green-800 text-xs px-2 py-1"
                                       whileHover={{ scale: 1.05 }}
                                     >
                                       {cert}
@@ -229,7 +229,7 @@ export default function ProductsPage() {
                 {/* Card "Vedi Tutti" */}
                 <SwiperSlide>
                   <motion.div
-                    className="bg-gradient-to-br from-[var(--marsilii-primary)] to-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden h-full flex items-center justify-center"
+                    className="bg-gradient-to-br from-[var(--marsilii-primary)] to-gray-800 shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden h-full flex items-center justify-center"
                     whileHover={{ scale: 1.03 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
@@ -331,7 +331,7 @@ export default function ProductsPage() {
             {downloadableDocuments.map((doc, index) => (
               <motion.div
                 key={doc.id}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-max"
+                className="bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-max"
                 initial={{ opacity: 0, y: 20 }}
                 animate={
                   isDownloadInView

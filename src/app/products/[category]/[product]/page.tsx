@@ -143,7 +143,7 @@ export default function ProductDetailPage() {
             >
               {product.image ? (
                 <motion.div 
-                  className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden"
+                  className="relative aspect-square bg-gray-100 overflow-hidden"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -155,7 +155,7 @@ export default function ProductDetailPage() {
                   />
                 </motion.div>
               ) : (
-                <div className="aspect-square bg-[var(--marsilii-background-secondary)] rounded-lg flex items-center justify-center">
+                <div className="aspect-square bg-[var(--marsilii-background-secondary)] flex items-center justify-center">
                   <div className="text-center">
                     <motion.div
                       animate={{ rotate: [0, 10, 0] }}
@@ -267,7 +267,7 @@ export default function ProductDetailPage() {
                     {product.certifications.map((cert, index) => (
                       <motion.span
                         key={index}
-                        className="bg-green-100 text-green-800 px-3 py-2 rounded-lg font-medium"
+                        className="bg-green-100 text-green-800 px-3 py-2 font-medium"
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={isProductInfoInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                         transition={{ duration: 0.3, delay: 0.7 + index * 0.1 }}
@@ -435,7 +435,7 @@ export default function ProductDetailPage() {
               .map((relatedProduct, index) => (
                 <motion.div
                   key={relatedProduct.id}
-                  className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100"
+                  className="bg-white shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100"
                   initial={{ opacity: 0, y: 30 }}
                   animate={isRelatedProductsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
