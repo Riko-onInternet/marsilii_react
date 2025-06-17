@@ -49,5 +49,5 @@ body {
 }
 
 [data-accent-weight="true"] {
-  font-weight: 500 !important; /* Imposta il peso desiderato */
+  font-weight: 500; /* Imposta il peso desiderato */
 }
