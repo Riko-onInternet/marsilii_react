@@ -216,7 +216,7 @@ export default function Brevetti() {
             {patents.map((patent, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 h-max"
+                className="bg-white shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 h-max"
                 variants={itemVariants}
                 whileHover={{ y: -5 }}
                 transition={{ type: "spring", stiffness: 300 }}
@@ -265,7 +265,7 @@ export default function Brevetti() {
                   {patent.number && (
                     <div className="mb-4">
                       <motion.span
-                        className="bg-[var(--marsilii-background-secondary)] text-sm px-3 py-1 rounded inline-flex items-center gap-2"
+                        className="bg-[var(--marsilii-background-secondary)] text-sm px-3 py-1 inline-flex items-center gap-2"
                         whileHover={{ scale: 1.05 }}
                       >
                         <BookOpen size={14} />
@@ -334,7 +334,7 @@ export default function Brevetti() {
               {getDocumentsByCategory("a1").map((doc, index) => (
                 <motion.div
                   key={doc.id}
-                  className="bg-white h-max rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6"
+                  className="bg-white h-max shadow-md hover:shadow-lg transition-shadow duration-300 p-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={
                     documentsInView
@@ -408,7 +408,7 @@ export default function Brevetti() {
               {getDocumentsByCategory("a2").map((doc, index) => (
                 <motion.div
                   key={doc.id}
-                  className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-max"
+                  className="bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-6 h-max"
                   initial={{ opacity: 0, y: 20 }}
                   animate={
                     documentsInView
@@ -482,7 +482,7 @@ export default function Brevetti() {
               {getDocumentsByCategory("a3").map((doc, index) => (
                 <motion.div
                   key={doc.id}
-                  className="bg-white h-max rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6"
+                  className="bg-white h-max shadow-md hover:shadow-lg transition-shadow duration-300 p-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={
                     documentsInView

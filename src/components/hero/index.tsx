@@ -1,4 +1,8 @@
+"use client";
+
 import { ReactNode } from "react";
+
+import AccentedText from "@/components/AccentedText";
 
 export default function Hero({
   title,
@@ -36,7 +40,7 @@ export default function Hero({
         </p>
         {subtitle && (
           <p className="text-base md:text-xl text-[var(--marsilii-primary)] max-w-[800px] w-full opacity-75 px-6">
-            {subtitle}
+            <AccentedText text={subtitle} baseWeight={400} accentWeight={600} />
           </p>
         )}
         {children && <div>{children}</div>}
