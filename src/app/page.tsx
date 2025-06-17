@@ -3,7 +3,16 @@
 import { Button } from "@heroui/react";
 
 // Icons
-import { Lock, Award, Clock3, MapPin, Phone, Mail, Shield, Zap } from "lucide-react";
+import {
+  Lock,
+  Award,
+  Clock3,
+  MapPin,
+  Phone,
+  Mail,
+  Shield,
+  Zap,
+} from "lucide-react";
 
 import AccentedText from "@/components/AccentedText";
 
@@ -17,6 +26,10 @@ import "swiper/css/autoplay";
 // modules
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import Link from "next/link";
+
+// Framer Motion
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const benefitCards = [
   {
@@ -105,7 +118,7 @@ const companyPayoffs = [
     description:
       "Ricerca e sviluppo costanti per garantire soluzioni all'avanguardia nel settore della sicurezza",
     image: "/img/bannermarsilii-1024x453.jpg",
-    icon: Zap
+    icon: Zap,
   },
   {
     id: "esperienza",
@@ -114,7 +127,7 @@ const companyPayoffs = [
     description:
       "Mezzo secolo di esperienza nella progettazione e realizzazione di serrature di alta sicurezza",
     image: "/img/04_Modello_Classico_Marsilii_Vista_04_01_.jpg",
-    icon: Clock3
+    icon: Clock3,
   },
   {
     id: "qualita",
@@ -123,47 +136,35 @@ const companyPayoffs = [
     description:
       "Prodotti testati e certificati secondo le più severe normative europee per garantire protezione totale",
     image: "/img/05_Custos_Esterno_Vista_02_04_.jpg",
-    icon: Shield
+    icon: Shield,
   },
 ];
 
-// Manteniamo mainProducts per il resto del codice se necessario
-/* const mainProducts = [
-  {
-    id: "porta-estro",
-    name: "Porta Blindata Linea Estro",
-    description:
-      "La porta complanare Marsilii con cerniere a scomparsa e serratura a chiusura automatica",
-    impactPhrase: "Sicurezza Invisibile, Protezione Totale",
-    image: "/img/products/a/A1/Estro.jpg",
-    href: "/products/porte-blindate-civili/porta-estro",
-    features: ["Classe RC4", "Chiusura Automatica", "Cerniere a Scomparsa"],
-  },
-  {
-    id: "porta-estro-zelo",
-    name: "Porta Blindata Linea Estro - Finitura Zelo",
-    description:
-      "Porta blindata Classe RC4 con finitura Zelo per un'estetica raffinata",
-    impactPhrase: "Eleganza e Sicurezza in Perfetta Armonia",
-    image: "/img/products/a/A2/Zelo.png",
-    href: "/products/porte-blindate-civili/porta-estro-zelo",
-    features: ["Finitura Zelo", "MDF Laccato", "Carter a Scomparsa"],
-  },
-  {
-    id: "porta-zelo-marsilii",
-    name: "Porta Blindata Linea Estro - Finitura Zelo Marsilii",
-    description: "Porta blindata con resistenza extra e piastre anti-mola",
-    impactPhrase: "Il Futuro della Sicurezza è qui",
-    image: "/img/products/a/A3/Zelo_Marsilii.png",
-    href: "/products/porte-blindate-civili/porta-zelo-marsilii",
-    features: ["Classe 5*", "Struttura Rinforzata", "Tecnologia Avanzata"],
-  },
-]; */
-
 export default function Home() {
+  // Refs per le animazioni al scroll
+  const lineeSectionRef = useRef(null);
+  const benefitsSectionRef = useRef(null);
+  const experienceSectionRef = useRef(null);
+  const contactSectionRef = useRef(null);
+
+  // Hook per rilevare quando gli elementi entrano nel viewport
+  const lineesInView = useInView(lineeSectionRef, { once: true, amount: 0.2 });
+  const benefitsInView = useInView(benefitsSectionRef, {
+    once: true,
+    amount: 0.2,
+  });
+  const experienceInView = useInView(experienceSectionRef, {
+    once: true,
+    amount: 0.2,
+  });
+  const contactInView = useInView(contactSectionRef, {
+    once: true,
+    amount: 0.2,
+  });
+
   return (
     <div>
-      {/* Swiper Slider */}
+      {/* Swiper Slider con animazioni */}
       <div className="relative h-[400px] md:h-[500px]">
         <Swiper
           modules={[Pagination, Navigation, Autoplay]}
@@ -187,10 +188,13 @@ export default function Home() {
         >
           {companyPayoffs.map((payoff) => (
             <SwiperSlide key={payoff.id}>
-              <div className="relative h-full flex items-center justify-center">
-                {/* Background Image */}
-                <div
+              <div className="relative h-full flex items-center justify-center overflow-hidden">
+                {/* Background Image con animazione */}
+                <motion.div
                   className="absolute inset-0 z-0"
+                  initial={{ scale: 1.1, opacity: 0.8 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 1 }}
                   style={{
                     backgroundImage: `url(${payoff.image})`,
                     backgroundSize: "cover",
@@ -200,29 +204,44 @@ export default function Home() {
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-white/40 z-10" />
 
-                {/* Content */}
+                {/* Content con animazioni */}
                 <div className="relative z-20 flex flex-col items-center gap-4 text-center text-black px-6 max-w-4xl">
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+                  <motion.h1
+                    className="text-3xl md:text-5xl lg:text-6xl font-bold"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.7, delay: 0.2 }}
+                  >
                     <AccentedText
                       text={payoff.title}
                       baseWeight={700}
                       accentWeight={900}
                     />
-                  </h1>
-                  <h2 className="text-xl md:text-2xl lg:text-3xl">
+                  </motion.h1>
+                  <motion.h2
+                    className="text-xl md:text-2xl lg:text-3xl"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.7, delay: 0.4 }}
+                  >
                     <AccentedText
                       text={payoff.slogan}
                       baseWeight={400}
                       accentWeight={600}
                     />
-                  </h2>
-                  <p className="text-base md:text-lg lg:text-xl opacity-90 max-w-2xl">
+                  </motion.h2>
+                  <motion.p
+                    className="text-base md:text-lg lg:text-xl opacity-90 max-w-2xl"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.7, delay: 0.6 }}
+                  >
                     <AccentedText
                       text={payoff.description}
                       baseWeight={300}
                       accentWeight={500}
                     />
-                  </p>
+                  </motion.p>
                 </div>
               </div>
             </SwiperSlide>
@@ -234,13 +253,31 @@ export default function Home() {
         </Swiper>
       </div>
 
-      {/* Le nostre linee */}
-      <div className="flex flex-col gap-8 mt-10">
+      {/* Le nostre linee con animazioni */}
+      <motion.div
+        ref={lineeSectionRef}
+        className="flex flex-col gap-8 mt-10"
+        initial={{ opacity: 0, y: 50 }}
+        animate={lineesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="w-full flex flex-col items-center text-center gap-4">
-          <p className="font-bold text-3xl text-black">Le nostre linee</p>
-          <p className="font-light text-lg text-black">
+          <motion.p
+            className="font-bold text-3xl text-black"
+            initial={{ opacity: 0 }}
+            animate={lineesInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Le nostre linee
+          </motion.p>
+          <motion.p
+            className="font-light text-lg text-black"
+            initial={{ opacity: 0 }}
+            animate={lineesInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
             Soluzioni specializzate per ogni settore di applicazione
-          </p>
+          </motion.p>
         </div>
         <div>
           <Swiper
@@ -270,7 +307,13 @@ export default function Home() {
                 className="aspect-square bg-center bg-no-repeat bg-cover select-none"
                 style={{ backgroundImage: `url(${item.src})` }}
               >
-                <div className="absolute bottom-0 left-0 w-full backdrop-blur-md bg-white/40 flex flex-col gap-3 p-3 md:p-4 lg:p-6">
+                <motion.div
+                  className="absolute bottom-0 left-0 w-full backdrop-blur-md bg-white/40 flex flex-col gap-3 p-3 md:p-4 lg:p-6"
+                  initial={{ y: 100, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
                   <p className="text-black font-medium text-xl md:text-2xl">
                     <AccentedText
                       text={item.title}
@@ -285,143 +328,188 @@ export default function Home() {
                       accentWeight={500}
                     />
                   </p>
-                  <Link
-                    className="bg-[var(--marsilii-primary)] text-white font-light text-xs md:text-sm gap-0 py-2.5 rounded-xl flex items-center justify-center hover:opacity-90"
-                    href={item.href}
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    Vai alla linea
-                  </Link>
-                </div>
+                    <Link
+                      className="bg-[var(--marsilii-primary)] text-white font-light text-xs md:text-sm gap-0 py-2.5 rounded-xl flex items-center justify-center hover:opacity-90"
+                      href={item.href}
+                    >
+                      Vai alla linea
+                    </Link>
+                  </motion.div>
+                </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
         <div className="flex items-center justify-center">
-          <Button
-            className="text-[var(--marsilii-primary)] border-[var(--marsilii-primary)] font-light"
-            radius="md"
-            variant="bordered"
-            onPress={() => {
-              window.location.href = "/linee";
-            }}
-          >
-            Scopri tutte le linee
-          </Button>
-        </div>
-      </div>
-
-      {/* Perché Scegliere Marsilii */}
-      <div className="my-10 py-8 flex flex-col items-center gap-16 px-4 bg-[var(--marsilii-background-secondary)]">
-        {/* Titolo */}
-        <div className="text-center flex flex-col gap-4">
-          <p className="text-4xl font-bold text-[var(--marsilii-primary)]">
-            <AccentedText
-              text="Perché Scegliere Marsilii"
-              baseWeight={700}
-              accentWeight={800}
-              className="text-4xl text-[var(--marsilii-primary)]"
-            />
-          </p>
-          <p>
-            <AccentedText
-              text="La nostra esperienza e innovazione al servizio della tua sicurezza"
-              baseWeight={300}
-              accentWeight={500}
-            />
-          </p>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-20 sm:gap-4 items-center sm:items-start justify-between max-w-[1000px] w-full">
-          {benefitCards.map((card, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center max-w-[300px] w-full gap-4"
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              className="text-[var(--marsilii-primary)] border-[var(--marsilii-primary)] font-light"
+              radius="md"
+              variant="bordered"
+              onPress={() => {
+                window.location.href = "/linee";
+              }}
             >
-              <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center">
-                <card.icon size={32} />
-              </div>
-              <p className="font-semibold text-center text-xl">
-                <AccentedText
-                  text={card.title}
-                  baseWeight={600}
-                  accentWeight={800}
-                />
-              </p>
-              <p className="text-center">
-                <AccentedText
-                  text={card.description}
-                  baseWeight={300}
-                  accentWeight={500}
-                />
-              </p>
-            </div>
-          ))}
+              Scopri tutte le linee
+            </Button>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* L'esperienza di Franco Marsilii [...] */}
-      <div className="pb-8 flex flex-col lg:flex-row items-center justify-between gap-4 px-4 lg:px-0 lg:pl-4">
-        <div className="flex flex-col items-start gap-9 w-full">
+      {/* L'esperienza di Franco Marsilii con animazioni */}
+      <motion.div
+        ref={experienceSectionRef}
+        className="pb-8 flex flex-col lg:flex-row items-center justify-between gap-4 px-4 lg:px-0 lg:pl-4"
+        initial={{ opacity: 0 }}
+        animate={experienceInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.div
+          className="flex flex-col items-start gap-9 w-full"
+          initial={{ x: -50, opacity: 0 }}
+          animate={
+            experienceInView ? { x: 0, opacity: 1 } : { x: -50, opacity: 0 }
+          }
+          transition={{ duration: 0.7 }}
+        >
           <div className="md:max-w-[600px] mx-auto">
-            <p className="font-medium text-3xl">
+            <motion.p
+              className="font-medium text-3xl"
+              initial={{ y: -20, opacity: 0 }}
+              animate={
+                experienceInView ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }
+              }
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               <AccentedText
                 text="L'esperienza di Franco Marsilii trasforma la sicurezza in innovazione"
                 baseWeight={500}
                 accentWeight={700}
               />
-            </p>
+            </motion.p>
             <div className="flex flex-col items-start gap-5 text-lg font-light">
-              <p>
-                <AccentedText
-                  text="La nostra azienda nasce dall'esperienza pluridecennale di Franco Marsilii, con l'obiettivo di realizzare serrature ad alto livello di sicurezza caratterizzate da insuperabile praticità."
-                  baseWeight={300}
-                  accentWeight={500}
-                />
-              </p>
-              <p>
-                <AccentedText
-                  text="Già nel 1989 abbiamo sviluppato il primo prototipo di Sistema a Chiusura Automatica Meccanica: una serratura che si blinda automaticamente quando la porta viene chiusa, senza necessità di girare la chiave."
-                  baseWeight={300}
-                  accentWeight={500}
-                />
-              </p>
-              <p className="flex items-center gap-3">
+              {[
+                "La nostra azienda nasce dall'esperienza pluridecennale di Franco Marsilii, con l'obiettivo di realizzare serrature ad alto livello di sicurezza caratterizzate da insuperabile praticità.",
+                "Già nel 1989 abbiamo sviluppato il primo prototipo di Sistema a Chiusura Automatica Meccanica: una serratura che si blinda automaticamente quando la porta viene chiusa, senza necessità di girare la chiave.",
+              ].map((text, index) => (
+                <motion.p
+                  key={index}
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={
+                    experienceInView
+                      ? { y: 0, opacity: 1 }
+                      : { y: 30, opacity: 0 }
+                  }
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.2 }}
+                >
+                  <AccentedText
+                    text={text}
+                    baseWeight={300}
+                    accentWeight={500}
+                  />
+                </motion.p>
+              ))}
+              <motion.p
+                className="flex items-center gap-3"
+                initial={{ y: 30, opacity: 0 }}
+                animate={
+                  experienceInView
+                    ? { y: 0, opacity: 1 }
+                    : { y: 30, opacity: 0 }
+                }
+                transition={{ duration: 0.5, delay: 0.7 }}
+                whileHover={{ scale: 1.05 }}
+              >
                 <Award />
                 <AccentedText
                   text="Leader nel settore dal 1989"
                   baseWeight={400}
                   accentWeight={600}
                 />
-              </p>
+              </motion.p>
             </div>
           </div>
-        </div>
-        <div
+        </motion.div>
+        <motion.div
           className="h-full lg:h-[500px] w-full md:w-4/5 lg:w-full aspect-square lg:aspect-auto bg-center bg-cover bg-no-repeat"
           style={{
             backgroundImage:
               "url('/img/02_Modello-Zelo-Boiserie_Vista_07_01_.jpg')",
           }}
+          initial={{ x: 50, opacity: 0 }}
+          animate={
+            experienceInView ? { x: 0, opacity: 1 } : { x: 50, opacity: 0 }
+          }
+          transition={{ duration: 0.7, delay: 0.3 }}
+          whileHover={{ scale: 1.02 }}
         />
-      </div>
+      </motion.div>
 
-      {/* Contattaci */}
-      <div className="py-8 px-6 flex flex-col items-center justify-center gap-8 bg-[var(--marsilii-background-secondary)] mt-8">
+      {/* Perché Scegliere Marsilii con animazioni */}
+      <motion.div
+        ref={benefitsSectionRef}
+        className="my-10 py-8 flex flex-col items-center gap-16 px-4 bg-[var(--marsilii-background-secondary)]"
+        initial={{ opacity: 0 }}
+        animate={benefitsInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        {/* Titolo */}
         <div className="text-center flex flex-col gap-4">
-          <p className="text-3xl font-semibold">Contattaci</p>
-          <p className="text-lg">
-            Siamo a tua disposizione per qualsiasi informazione sui nostri
-            prodotti
-          </p>
+          <motion.p
+            className="text-4xl font-bold text-[var(--marsilii-primary)]"
+            initial={{ y: -20, opacity: 0 }}
+            animate={
+              benefitsInView ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }
+            }
+            transition={{ duration: 0.5 }}
+          >
+            <AccentedText
+              text="Perché Scegliere Marsilii"
+              baseWeight={700}
+              accentWeight={800}
+              className="text-4xl text-[var(--marsilii-primary)]"
+            />
+          </motion.p>
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={
+              benefitsInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }
+            }
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <AccentedText
+              text="La nostra esperienza e innovazione al servizio della tua sicurezza"
+              baseWeight={300}
+              accentWeight={500}
+            />
+          </motion.p>
         </div>
         <div className="flex flex-col sm:flex-row gap-20 sm:gap-4 items-center sm:items-start justify-between max-w-[1000px] w-full">
-          {contact.map((card, index) => (
-            <div
+          {benefitCards.map((card, index) => (
+            <motion.div
               key={index}
               className="flex flex-col items-center justify-center max-w-[300px] w-full gap-4"
+              initial={{ opacity: 0, y: 50 }}
+              animate={
+                benefitsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+              }
+              transition={{ duration: 0.5, delay: 0.2 * (index + 1) }}
+              whileHover={{ y: -10, transition: { duration: 0.3 } }}
             >
-              <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center">
+              <motion.div
+                className="w-16 h-16 rounded-full bg-white flex items-center justify-center"
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <card.icon size={32} />
-              </div>
+              </motion.div>
               <p className="font-semibold text-center text-xl">
                 <AccentedText
                   text={card.title}
@@ -436,10 +524,82 @@ export default function Home() {
                   accentWeight={500}
                 />
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
+
+      {/* Contattaci con animazioni */}
+      <motion.div
+        ref={contactSectionRef}
+        className="py-8 px-6 flex flex-col items-center justify-center gap-8 bg-[var(--marsilii-background-secondary)] mt-8"
+        initial={{ opacity: 0, y: 50 }}
+        animate={contactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="text-center flex flex-col gap-4">
+          <motion.p
+            className="text-3xl font-semibold"
+            initial={{ y: -20, opacity: 0 }}
+            animate={
+              contactInView ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }
+            }
+            transition={{ duration: 0.5 }}
+          >
+            Contattaci
+          </motion.p>
+          <motion.p
+            className="text-lg"
+            initial={{ y: 20, opacity: 0 }}
+            animate={
+              contactInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }
+            }
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Siamo a tua disposizione per qualsiasi informazione sui nostri
+            prodotti
+          </motion.p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-20 sm:gap-4 items-center sm:items-start justify-between max-w-[1000px] w-full">
+          {contact.map((card, index) => (
+            <motion.div
+              key={index}
+              className="flex flex-col items-center justify-center max-w-[300px] w-full gap-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={
+                contactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+              }
+              transition={{ duration: 0.5, delay: 0.3 * (index + 1) }}
+              whileHover={{ y: -10, transition: { duration: 0.3 } }}
+            >
+              <motion.div
+                className="w-16 h-16 rounded-full bg-white flex items-center justify-center"
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <card.icon size={32} />
+              </motion.div>
+              <p className="font-semibold text-center text-xl">
+                <AccentedText
+                  text={card.title}
+                  baseWeight={600}
+                  accentWeight={800}
+                />
+              </p>
+              <p className="text-center">
+                <AccentedText
+                  text={card.description}
+                  baseWeight={300}
+                  accentWeight={500}
+                />
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 }
