@@ -1,13 +1,12 @@
 "use client";
 
-// import Image from "next/image";
-
-import Hero from "@/components/hero";
 
 import { Button } from "@heroui/react";
 
 // Icons
 import { Lock, Award, Clock3, MapPin, Phone, Mail } from "lucide-react";
+
+import AccentedText from "@/components/AccentedText";
 
 // ------ Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,8 +14,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/autoplay";
 // modules
-import { Pagination, Navigation } from "swiper/modules";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import Link from "next/link";
 
 const benefitCards = [
@@ -97,39 +97,160 @@ const contact = [
   },
 ];
 
+const mainProducts = [
+  {
+    id: "porta-estro",
+    name: "Porta Blindata Linea Estro",
+    description: "La porta complanare Marsilii con cerniere a scomparsa e serratura a chiusura automatica",
+    impactPhrase: "Sicurezza Invisibile, Protezione Totale",
+    image: "/img/products/a/A1/Estro.jpg",
+    href: "/products/porte-blindate-civili/porta-estro",
+    features: ["Classe RC4", "Chiusura Automatica", "Cerniere a Scomparsa"]
+  },
+  {
+    id: "porta-estro-zelo",
+    name: "Porta Blindata Linea Estro - Finitura Zelo",
+    description: "Porta blindata Classe RC4 con finitura Zelo per un'estetica raffinata",
+    impactPhrase: "Eleganza e Sicurezza in Perfetta Armonia",
+    image: "/img/products/a/A2/Zelo.png",
+    href: "/products/porte-blindate-civili/porta-estro-zelo",
+    features: ["Finitura Zelo", "MDF Laccato", "Carter a Scomparsa"]
+  },
+  {
+    id: "porta-zelo-marsilii",
+    name: "Porta Blindata Linea Estro - Finitura Zelo Marsilii",
+    description: "Porta blindata con resistenza extra e piastre anti-mola",
+    impactPhrase: "Il Futuro della Sicurezza è Qui",
+    image: "/img/products/a/A3/Zelo_Marsilii.png",
+    href: "/products/porte-blindate-civili/porta-zelo-marsilii",
+    features: ["Classe 5*", "Struttura Rinforzata", "Tecnologia Avanzata"]
+  }
+];
+
+
 export default function Home() {
   return (
     <div>
-      <Hero
-        title="Sicurezza e Innovazione"
-        subtitle="Leader nel settore delle serrature di sicurezza con oltre 50 anni di esperienza. Realizziamo serrature ad alto livello di sicurezza ed insuperabile praticità."
-      >
-        <div className="flex items-center gap-3">
-          <Button
-            className="bg-[var(--marsilii-primary)] text-white font-light"
-            radius="md"
-          >
-            Scopri i Prodotti
-          </Button>
-          <Button
-            className="text-[var(--marsilii-primary)] font-light border-[var(--marsilii-primary)]"
-            variant="bordered"
-            radius="md"
-          >
-            La Nostra Storia
-          </Button>
-        </div>
-      </Hero>
+      {/* Sostituisci Hero con Swiper Slider */}
+      <div className="relative h-[500px] md:h-[600px]">
+        <Swiper
+          modules={[Pagination, Navigation, Autoplay]}
+          spaceBetween={0}
+          slidesPerView={1}
+          pagination={{
+            clickable: true,
+            bulletClass: 'swiper-pagination-bullet !bg-black/50',
+            bulletActiveClass: 'swiper-pagination-bullet-active !bg-black'
+          }}
+          navigation={{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          }}
+          autoplay={{
+            delay: 7000,
+            disableOnInteraction: false
+          }}
+          loop={true}
+          className="h-full"
+        >
+          {mainProducts.map((product) => (
+            <SwiperSlide key={product.id}>
+              <div className="relative h-full flex items-center justify-center">
+                {/* Background Image */}
+                <div
+                  className="absolute inset-0 z-0"
+                  style={{
+                    backgroundImage: `url(${product.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-white/40 z-10" />
+                
+                {/* Content */}
+                <div className="relative z-20 flex flex-col items-center gap-6 text-center text-black px-6 max-w-4xl">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+                    <AccentedText 
+                      text={product.name} 
+                      baseWeight={700} 
+                      accentWeight={900}
+                    />
+                  </h1>
+                  <h2 className="text-xl md:text-2xl lg:text-3xl">
+                    <AccentedText 
+                      text={product.impactPhrase} 
+                      baseWeight={400} 
+                      accentWeight={600}
+                    />
+                  </h2>
+                  <p className="text-base md:text-lg lg:text-xl opacity-90 max-w-2xl">
+                    <AccentedText 
+                      text={product.description} 
+                      baseWeight={300} 
+                      accentWeight={500}
+                    />
+                  </p>
+                  
+                  {/* CTA Buttons */}
+                  <div className="flex flex-col sm:flex-row items-center gap-4">
+                    <Link href={product.href}>
+                      <Button
+                        className="bg-[var(--marsilii-primary)] font-light text-white px-8 py-3 text-base"
+                        radius="md"
+                        size="lg"
+                      >
+                        <AccentedText 
+                          text={`Scopri ${product.name.split(' ')[2]}`} 
+                          baseWeight={300} 
+                          accentWeight={500}
+                        />
+                      </Button>
+                    </Link>
+                    <Link href="/products">
+                      <Button
+                        className="text[var(--marsilii-primary)] font-light border-[var(--marsilii-primary)] hover:bg-white/10 px-8 py-3 text-base"
+                        variant="bordered"
+                        radius="md"
+                        size="lg"
+                      >
+                        <AccentedText 
+                          text="Tutti i Prodotti" 
+                          baseWeight={300} 
+                          accentWeight={500}
+                        />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+          
+          {/* Navigation Buttons */}
+          <div className="swiper-button-prev !text-white !w-12 !h-12 after:!text-2xl !left-4" />
+          <div className="swiper-button-next !text-white !w-12 !h-12 after:!text-2xl !right-4" />
+        </Swiper>
+      </div>
 
       {/* Perché Scegliere Marsilii */}
       <div className="py-16 flex flex-col items-center gap-16 px-4">
         {/* Titolo */}
         <div className="text-center flex flex-col gap-4">
           <p className="text-4xl font-bold text-[var(--marsilii-primary)]">
-            Perch<span className="font-black">é</span> Scegliere Marsilii
+            <AccentedText 
+              text="Perché Scegliere Marsilii" 
+              baseWeight={700} 
+              accentWeight={900}
+              className="text-4xl font-bold text-[var(--marsilii-primary)]"
+            />
           </p>
           <p>
-            La nostra esperienza e innovazione al servizio della tua sicurezza
+            <AccentedText 
+              text="La nostra esperienza e innovazione al servizio della tua sicurezza" 
+              baseWeight={300} 
+              accentWeight={500}
+            />
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-20 sm:gap-4 items-center sm:items-start justify-between max-w-[1000px] w-full">

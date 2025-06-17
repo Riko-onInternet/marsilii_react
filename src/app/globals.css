@@ -23,6 +23,9 @@ body {
 .swiper-pagination-bullet-active {
   background: var(--marsilii-primary) !important;
 }
+.swiper-pagination-bullet {
+  background: var(--marsilii-primary) !important;
+}
 
 .swiper-button-prev,
 .swiper-button-next {
@@ -37,4 +40,14 @@ body {
   @media (min-width: 1024px) {
     display: block;
   }
+}
+
+
+/* Stile per lettere accentate */
+[data-accent-weight] {
+  display: inline;
+}
+
+[data-accent-weight="true"] {
+  font-weight: 500 !important; /* Imposta il peso desiderato */
 }
