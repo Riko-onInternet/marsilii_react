@@ -44,7 +44,7 @@ const patents: Patent[] = [
       "Brevetto per un innovativo sistema di chiusura automatica meccanica per porte blindate che garantisce massima sicurezza e affidabilità.",
     year: "1989",
     number: "IT1234567",
-    image: "/img/bannermarsilii-1024x453.jpg",
+    image: "/img/03_Modello_Estro_Vista_03b_02_.jpg",
   },
   {
     id: "brevetto-2",
@@ -53,7 +53,7 @@ const patents: Patent[] = [
       "Sistema brevettato di serratura a doppia mappa con chiave protetta e meccanismo anti-manipolazione.",
     year: "1995",
     number: "IT7654321",
-    image: "/img/bannermarsilii-1024x453.jpg",
+    image: "/img/bannerestro.jpg",
   },
   {
     id: "brevetto-3",
@@ -62,7 +62,7 @@ const patents: Patent[] = [
       "Innovativo sistema di isolamento termico per porte blindate che garantisce efficienza energetica senza compromettere la sicurezza.",
     year: "2005",
     number: "IT9876543",
-    image: "/img/bannermarsilii-1024x453.jpg",
+    image: "/img/02_Modello-Zelo-Boiserie_Vista_02_05_.jpg",
   },
 ];
 
