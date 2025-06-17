@@ -3,7 +3,7 @@
 import { Button } from "@heroui/react";
 
 // Icons
-import { Lock, Award, Clock3, MapPin, Phone, Mail } from "lucide-react";
+import { Lock, Award, Clock3, MapPin, Phone, Mail, Shield, Zap } from "lucide-react";
 
 import AccentedText from "@/components/AccentedText";
 
@@ -96,7 +96,39 @@ const contact = [
   },
 ];
 
-const mainProducts = [
+// Nuovo array con i payoff d'impatto dell'azienda
+const companyPayoffs = [
+  {
+    id: "innovazione",
+    title: "Innovazione Continua",
+    slogan: "Oltre 10 Brevetti dal 1992",
+    description:
+      "Ricerca e sviluppo costanti per garantire soluzioni all'avanguardia nel settore della sicurezza",
+    image: "/img/bannermarsilii-1024x453.jpg",
+    icon: Zap
+  },
+  {
+    id: "esperienza",
+    title: "50 Anni di Eccellenza",
+    slogan: "Dal 1970 Leader nella Sicurezza",
+    description:
+      "Mezzo secolo di esperienza nella progettazione e realizzazione di serrature di alta sicurezza",
+    image: "/img/04_Modello_Classico_Marsilii_Vista_04_01_.jpg",
+    icon: Clock3
+  },
+  {
+    id: "qualita",
+    title: "Qualità Certificata",
+    slogan: "Massimi Standard di Sicurezza",
+    description:
+      "Prodotti testati e certificati secondo le più severe normative europee per garantire protezione totale",
+    image: "/img/05_Custos_Esterno_Vista_02_04_.jpg",
+    icon: Shield
+  },
+];
+
+// Manteniamo mainProducts per il resto del codice se necessario
+/* const mainProducts = [
   {
     id: "porta-estro",
     name: "Porta Blindata Linea Estro",
@@ -121,18 +153,18 @@ const mainProducts = [
     id: "porta-zelo-marsilii",
     name: "Porta Blindata Linea Estro - Finitura Zelo Marsilii",
     description: "Porta blindata con resistenza extra e piastre anti-mola",
-    impactPhrase: "Il Futuro della Sicurezza è Qui",
+    impactPhrase: "Il Futuro della Sicurezza è qui",
     image: "/img/products/a/A3/Zelo_Marsilii.png",
     href: "/products/porte-blindate-civili/porta-zelo-marsilii",
     features: ["Classe 5*", "Struttura Rinforzata", "Tecnologia Avanzata"],
   },
-];
+]; */
 
 export default function Home() {
   return (
     <div>
       {/* Swiper Slider */}
-      <div className="relative h-[500px] md:h-[600px]">
+      <div className="relative h-[400px] md:h-[500px]">
         <Swiper
           modules={[Pagination, Navigation, Autoplay]}
           spaceBetween={0}
@@ -153,14 +185,14 @@ export default function Home() {
           loop={true}
           className="h-full"
         >
-          {mainProducts.map((product) => (
-            <SwiperSlide key={product.id}>
+          {companyPayoffs.map((payoff) => (
+            <SwiperSlide key={payoff.id}>
               <div className="relative h-full flex items-center justify-center">
                 {/* Background Image */}
                 <div
                   className="absolute inset-0 z-0"
                   style={{
-                    backgroundImage: `url(${product.image})`,
+                    backgroundImage: `url(${payoff.image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -172,56 +204,25 @@ export default function Home() {
                 <div className="relative z-20 flex flex-col items-center gap-4 text-center text-black px-6 max-w-4xl">
                   <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
                     <AccentedText
-                      text={product.name}
+                      text={payoff.title}
                       baseWeight={700}
                       accentWeight={900}
                     />
                   </h1>
                   <h2 className="text-xl md:text-2xl lg:text-3xl">
                     <AccentedText
-                      text={product.impactPhrase}
+                      text={payoff.slogan}
                       baseWeight={400}
                       accentWeight={600}
                     />
                   </h2>
                   <p className="text-base md:text-lg lg:text-xl opacity-90 max-w-2xl">
                     <AccentedText
-                      text={product.description}
+                      text={payoff.description}
                       baseWeight={300}
                       accentWeight={500}
                     />
                   </p>
-
-                  {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row items-center gap-4">
-                    <Link href={product.href}>
-                      <Button
-                        className="bg-[var(--marsilii-primary)] font-light text-white"
-                        radius="md"
-                        size="lg"
-                      >
-                        <AccentedText
-                          text={`Scopri ${product.name.split(" ")[2]}`}
-                          baseWeight={300}
-                          accentWeight={500}
-                        />
-                      </Button>
-                    </Link>
-                    <Link href="/products">
-                      <Button
-                        className="text[var(--marsilii-primary)] font-light border-[var(--marsilii-primary)] hover:bg-white/10"
-                        variant="bordered"
-                        radius="md"
-                        size="lg"
-                      >
-                        <AccentedText
-                          text="Tutti i Prodotti"
-                          baseWeight={300}
-                          accentWeight={500}
-                        />
-                      </Button>
-                    </Link>
-                  </div>
                 </div>
               </div>
             </SwiperSlide>

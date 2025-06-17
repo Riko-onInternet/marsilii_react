@@ -26,15 +26,6 @@ export default function ProductsPage() {
       {/* Slider Prodotti per Categoria */}
       <div className="py-16 px-4">
         <div className="max-w-[1400px] mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[var(--marsilii-primary)] mb-4">
-              I Nostri Prodotti
-            </h2>
-            <p className="text-lg text-gray-600">
-              Scopri la nostra gamma completa di soluzioni di sicurezza
-            </p>
-          </div>
-
           {productCategories.map((category) => (
             <div key={category.id} className="mb-16">
               {/* Titolo Categoria */}

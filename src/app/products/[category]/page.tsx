@@ -2,17 +2,18 @@
 
 import { useParams } from "next/navigation";
 import Hero from "@/components/hero";
-import { Button } from "@heroui/react";
+import { Button, Breadcrumbs, BreadcrumbItem } from "@heroui/react";
 import { productCategories, getProductsByCategory } from "@/data/products";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Eye } from "lucide-react";
+import AccentedText from "@/components/AccentedText";
 
 export default function CategoryPage() {
   const params = useParams();
   const categoryId = params.category as string;
-  
-  const category = productCategories.find(cat => cat.id === categoryId);
+
+  const category = productCategories.find((cat) => cat.id === categoryId);
   const products = getProductsByCategory(categoryId);
 
   if (!category) {
@@ -20,14 +21,22 @@ export default function CategoryPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-[var(--marsilii-primary)] mb-4">
-            Categoria non trovata
+            <AccentedText
+              text="Categoria non trovata"
+              baseWeight={600}
+              accentWeight={800}
+            />
           </h1>
           <Link href="/products">
             <Button
               className="bg-[var(--marsilii-primary)] text-white font-light"
               radius="md"
             >
-              Torna ai Prodotti
+              <AccentedText
+                text="Torna ai Prodotti"
+                baseWeight={300}
+                accentWeight={500}
+              />
             </Button>
           </Link>
         </div>
@@ -37,22 +46,53 @@ export default function CategoryPage() {
 
   return (
     <div>
-      <Hero
-        title={category.name}
-        subtitle={category.description}
-        size="sm"
-      />
+      <Hero title={category.name} subtitle={category.description} size="sm" />
 
       {/* Breadcrumb e Back Button */}
       <div className="py-6 px-4 bg-[var(--marsilii-background-secondary)]">
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <Breadcrumbs
+            size="sm"
+            color="primary"
+            className="text-gray-600"
+            variant="solid"
+            radius="lg"
+            separator="/"
+          >
+            <BreadcrumbItem>
+              <Link
+                href="/"
+                className="hover:text-[var(--marsilii-primary)] transition-colors"
+              >
+                Home
+              </Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <Link
+                href="/products"
+                className="hover:text-[var(--marsilii-primary)] transition-colors"
+              >
+                Prodotti
+              </Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <span className="font-medium text-[var(--marsilii-primary)]">
+                {category.name}
+              </span>
+            </BreadcrumbItem>
+          </Breadcrumbs>
+
           <Link href="/products">
             <Button
               className="text-[var(--marsilii-primary)] font-light"
               variant="light"
               startContent={<ArrowLeft size={16} />}
             >
-              Torna alle Categorie
+              <AccentedText
+                text="Torna alle Categorie"
+                baseWeight={300}
+                accentWeight={500}
+              />
             </Button>
           </Link>
         </div>
@@ -63,10 +103,18 @@ export default function CategoryPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-[var(--marsilii-primary)] mb-4">
-              Prodotti Disponibili
+              <AccentedText
+                text="Prodotti Disponibili"
+                baseWeight={600}
+                accentWeight={800}
+              />
             </h2>
             <p className="text-lg text-gray-600">
-              {products.length} prodotti in questa categoria
+              <AccentedText
+                text={`${products.length} prodotti in questa categoria`}
+                baseWeight={300}
+                accentWeight={500}
+              />
             </p>
           </div>
 
@@ -86,59 +134,103 @@ export default function CategoryPage() {
                     />
                   </div>
                 )}
-                
+
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-[var(--marsilii-primary)] mb-3">
-                    {product.name}
+                    <AccentedText
+                      text={`${product.name}`}
+                      baseWeight={500}
+                      accentWeight={700}
+                    />
                   </h3>
                   <p className="text-gray-600 mb-4 text-sm">
-                    {product.description}
+                    <AccentedText
+                      text={`${product.description}`}
+                      baseWeight={300}
+                      accentWeight={500}
+                    />
                   </p>
-                  
-                  {product.specifications && product.specifications.length > 0 && (
-                    <div className="mb-4">
-                      <h4 className="font-medium text-sm text-gray-700 mb-2">Caratteristiche:</h4>
-                      <div className="flex flex-wrap gap-1">
-                        {product.specifications.slice(0, 3).map((spec, index) => (
-                          <span
-                            key={index}
-                            className="bg-[var(--marsilii-background-secondary)] text-xs px-2 py-1 rounded"
-                          >
-                            {spec}
-                          </span>
-                        ))}
+
+                  {product.specifications &&
+                    product.specifications.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="font-medium text-sm text-gray-700 mb-2">
+                          <AccentedText
+                            text="Caratteristiche:"
+                            baseWeight={400}
+                            accentWeight={600}
+                          />
+                        </h4>
+                        <div className="flex flex-wrap gap-1">
+                          {product.specifications
+                            .slice(0, 3)
+                            .map((spec, index) => (
+                              <span
+                                key={index}
+                                className="bg-[var(--marsilii-background-secondary)] text-xs px-2 py-1 rounded"
+                              >
+                                <AccentedText
+                                  text={`${spec}`}
+                                  baseWeight={300}
+                                  accentWeight={500}
+                                />
+                              </span>
+                            ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  
-                  {product.certifications && product.certifications.length > 0 && (
-                    <div className="mb-4">
-                      <h4 className="font-medium text-sm text-gray-700 mb-2">Certificazioni:</h4>
-                      <div className="flex flex-wrap gap-1">
-                        {product.certifications.slice(0, 2).map((cert, index) => (
-                          <span
-                            key={index}
-                            className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
-                          >
-                            {cert}
-                          </span>
-                        ))}
-                        {product.certifications.length > 2 && (
-                          <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
-                            +{product.certifications.length - 2} certificati
-                          </span>
-                        )}
+                    )}
+
+                  {product.certifications &&
+                    product.certifications.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="font-medium text-sm text-gray-700 mb-2">
+                          <AccentedText
+                            text="Certificazioni:"
+                            baseWeight={400}
+                            accentWeight={600}
+                          />
+                        </h4>
+                        <div className="flex flex-wrap gap-1">
+                          {product.certifications
+                            .slice(0, 2)
+                            .map((cert, index) => (
+                              <span
+                                key={index}
+                                className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
+                              >
+                                <AccentedText
+                                  text={`${cert}`}
+                                  baseWeight={300}
+                                  accentWeight={500}
+                                />
+                              </span>
+                            ))}
+                          {product.certifications.length > 2 && (
+                            <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded">
+                              <AccentedText
+                                text={`+${
+                                  product.certifications.length - 2
+                                } certificati`}
+                                baseWeight={300}
+                                accentWeight={500}
+                              />
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  
+                    )}
+
                   <Link href={`/products/${categoryId}/${product.slug}`}>
                     <Button
                       className="w-full bg-[var(--marsilii-primary)] text-white font-light"
                       radius="md"
                       startContent={<Eye size={16} />}
                     >
-                      Visualizza Dettagli
+                      <AccentedText
+                        text="Visualizza Dettagli"
+                        baseWeight={300}
+                        accentWeight={500}
+                      />
                     </Button>
                   </Link>
                 </div>
@@ -152,10 +244,18 @@ export default function CategoryPage() {
       <div className="py-16 px-4 bg-[var(--marsilii-background-secondary)]">
         <div className="max-w-[800px] mx-auto text-center">
           <h2 className="text-2xl font-bold text-[var(--marsilii-primary)] mb-4">
-            Interessato a questi prodotti?
+            <AccentedText
+              text="Interessato a questi prodotti?"
+              baseWeight={600}
+              accentWeight={800}
+            />
           </h2>
           <p className="text-lg text-gray-600 mb-8">
-            Contattaci per ricevere informazioni dettagliate e preventivi personalizzati
+            <AccentedText
+              text="Contattaci per ricevere informazioni dettagliate e preventivi personalizzati"
+              baseWeight={300}
+              accentWeight={500}
+            />
           </p>
           <Link href="/contact">
             <Button
@@ -163,7 +263,11 @@ export default function CategoryPage() {
               radius="md"
               size="lg"
             >
-              Richiedi Informazioni
+              <AccentedText
+                text="Richiedi Informazioni"
+                baseWeight={300}
+                accentWeight={500}
+              />
             </Button>
           </Link>
         </div>

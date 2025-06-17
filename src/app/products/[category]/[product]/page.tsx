@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import Hero from "@/components/hero";
-import { Button } from "@heroui/react";
+import { Button, Breadcrumbs, BreadcrumbItem } from "@heroui/react";
 import { getProductBySlug, productCategories } from "@/data/products";
 import Link from "next/link";
 import Image from "next/image";
@@ -40,7 +40,7 @@ export default function ProductDetailPage() {
     <div>
       <Hero
         title={product.name}
-        subtitle={product.description}
+        // subtitle={product.description}
         size="sm"
         src={product.image}
       />
@@ -48,36 +48,44 @@ export default function ProductDetailPage() {
       {/* Breadcrumb */}
       <div className="py-6 px-4 bg-[var(--marsilii-background-secondary)]">
         <div className="max-w-[1200px] mx-auto">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Link
-              href="/products"
-              className="hover:text-[var(--marsilii-primary)]"
-            >
-              Prodotti
-            </Link>
-            <span>/</span>
-            <Link
-              href={`/products/${categoryId}`}
-              className="hover:text-[var(--marsilii-primary)]"
-            >
-              {category.name}
-            </Link>
-            <span>/</span>
-            <span className="text-[var(--marsilii-primary)] font-medium">
-              {product.name}
-            </span>
-          </div>
-          <div className="mt-4">
-            <Link href={`/products/${categoryId}`}>
-              <Button
-                className="text-[var(--marsilii-primary)] font-light"
-                variant="light"
-                startContent={<ArrowLeft size={16} />}
+          <Breadcrumbs
+            size="sm"
+            className="text-gray-600"
+            variant="solid"
+            radius="lg"
+            separator="/"
+          >
+            <BreadcrumbItem>
+              <Link
+                href="/products"
+                className="hover:text-[var(--marsilii-primary)]"
               >
-                Torna alla Categoria
-              </Button>
-            </Link>
-          </div>
+                Prodotti
+              </Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <Link
+                href={`/products/${categoryId}`}
+                className="hover:text-[var(--marsilii-primary)]"
+              >
+                {category.name}
+              </Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <span className="text-[var(--marsilii-primary)] font-normal">
+                {product.name}
+              </span>
+            </BreadcrumbItem>
+          </Breadcrumbs>
+          <Link href={`/products/${categoryId}`}>
+            <Button
+              className="text-[var(--marsilii-primary)] font-light"
+              variant="light"
+              startContent={<ArrowLeft size={16} />}
+            >
+              Torna alla Categoria
+            </Button>
+          </Link>
         </div>
       </div>
 

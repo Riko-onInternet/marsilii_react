@@ -8,7 +8,7 @@ export default function Hero({
   children,
 }: {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   size?: "sm" | "md";
   src?: string;
   children?: ReactNode;
@@ -34,10 +34,12 @@ export default function Hero({
         <p className="text-4xl md:text-6xl font-bold text-[var(--marsilii-primary)]">
           {title}
         </p>
-        <p className="text-base md:text-xl text-[var(--marsilii-primary)] max-w-[800px] w-full opacity-75 px-6">
-          {subtitle}
-        </p>
-        <div>{children}</div>
+        {subtitle && (
+          <p className="text-base md:text-xl text-[var(--marsilii-primary)] max-w-[800px] w-full opacity-75 px-6">
+            {subtitle}
+          </p>
+        )}
+        {children && <div>{children}</div>}
       </div>
     </div>
   );
