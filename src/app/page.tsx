@@ -7,9 +7,8 @@ import {
   Lock,
   Award,
   Clock3,
-  /* MapPin,
+  MapPin,
   Phone,
-  Mail, */
   Shield,
   Zap,
 } from "lucide-react";
@@ -54,40 +53,40 @@ const benefitCards = [
 
 const swiperContent = [
   {
-    title: "Linea Estro",
-    desc: "La porta complanare Marsilii con cerniere a scomparsa e serratura a chiusura automatica",
+    title: "Porte e Infissi Blindati Civili",
+    desc: "Soluzioni di sicurezza per abitazioni private con tecnologie all'avanguardia, incluse porte blindate Estro, Zelo e Custos",
     src: "/img/bannerestro.jpg",
-    href: "/linea-estro/",
+    href: "/products/porte-blindate-civili",
   },
   {
-    title: "Linea Zelo",
-    desc: "La porta con serratura a chiusura automatica. Un progetto che realizza l’integrazione fra porta e architettura d’interni.",
+    title: "Infissi e Arredi Carcerari",
+    desc: "Soluzioni specializzate per istituti penitenziari e strutture di sicurezza, dalle porte tamburate agli arredi detentivi",
     src: "/img/02_Modello-Zelo-Boiserie_Vista_02_05_.jpg",
-    href: "/linea-estro/",
+    href: "/products/infissi-arredi-carcerari",
   },
   {
-    title: "Linea Custos",
-    desc: "Perfettamente complanare alla parete, Custos offre la possibilità di apertura a tirare o a spingere, garantendo la massima libertà progettuale.",
+    title: "Serrature di Sicurezza",
+    desc: "Sistemi di chiusura innovativi con tecnologia brevettata Marsilii, disponibili in versione manuale ed elettrica",
     src: "/img/05_Custos_Esterno_Vista_02_04_.jpg",
-    href: "/linea-estro/",
+    href: "/products/serrature-sicurezza",
   },
   {
-    title: "Linea Marsilii",
-    desc: "Un progetto che realizza l’integrazione fra porta e pareti: una sintesi sempre più esclusiva fra elementi d’arredo e architettura d’internia",
+    title: "Infissi Non Blindati",
+    desc: "Soluzioni tradizionali per porte interne, finestre, vetrate e portoncini in vari materiali e finiture",
     src: "/img/04_Modello_Classico_Marsilii_Vista_04_01_.jpg",
-    href: "/linea-estro/",
+    href: "/products/infissi-non-blindati",
+  },
+  {
+    title: "Accessori",
+    desc: "Complementi e accessori per completare i sistemi di sicurezza, inclusi maniglioni, pomi e sistemi biometrici",
+    src: "/img/Porta_Corretta_02_.jpg",
+    href: "/products/accessori",
   },
   {
     title: "Porte Vetrate",
     desc: "La scelta del vetro è indicata per chi necessita della sicurezza di una porta blindata senza dover rinunciare alla luce solare",
-    src: "/img/Porta_Corretta_02_.jpg",
-    href: "/linea-estro/",
-  },
-  {
-    title: "Tagliafuoco EI 120",
-    desc: "Resistenza al fuoco EI 120. Porta isolata con 4 materiali diversi tutti specifici per la resistenza al fuoco.",
     src: "/img/03_Modello_Estro_Vista_03b_02_.jpg",
-    href: "/linea-estro/",
+    href: "/products/porte-blindate-civili",
   },
 ];
 
@@ -263,7 +262,7 @@ export default function Home() {
               clickable: true,
             }}
             navigation={true}
-            loop={true}
+            loop={false}
             slidesPerView={1}
             breakpoints={{
               640: {
@@ -323,16 +322,15 @@ export default function Home() {
         </div>
         <div className="flex items-center justify-center">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              className="text-[var(--marsilii-primary)] border-[var(--marsilii-primary)] font-light"
-              radius="md"
-              variant="bordered"
-              onPress={() => {
-                window.location.href = "/linee";
-              }}
-            >
-              Scopri tutte le linee
-            </Button>
+            <Link href={"/products"}>
+              <Button
+                className="text-[var(--marsilii-primary)] border-[var(--marsilii-primary)] font-light"
+                radius="md"
+                variant="bordered"
+              >
+                Scopri tutte le linee
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </motion.div>
@@ -503,6 +501,303 @@ export default function Home() {
               </p>
             </motion.div>
           ))}
+        </div>
+      </motion.div>
+
+      {/* Sezione Brevetti con animazioni */}
+      <motion.div
+        className="py-16 px-4 bg-[var(--marsilii-background-secondary)]"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <div className="max-w-[1200px] mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-[var(--marsilii-primary)] mb-4">
+              <AccentedText
+                text="I Nostri Brevetti"
+                baseWeight={600}
+                accentWeight={800}
+              />
+            </h2>
+            <p className="text-lg text-gray-600 max-w-[800px] mx-auto">
+              <AccentedText
+                text="Innovazione e ricerca continua per garantire la massima sicurezza"
+                baseWeight={300}
+                accentWeight={500}
+              />
+            </p>
+          </motion.div>
+
+          <div className="flex flex-col md:flex-row gap-8 items-stretch">
+            <motion.div
+              className="bg-white rounded-lg shadow-md p-6 flex-1"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 10 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <Award
+                    className="text-[var(--marsilii-primary)]"
+                    size={28}
+                  />
+                </motion.div>
+                <h3 className="font-semibold text-[var(--marsilii-primary)] text-xl">
+                  <AccentedText
+                    text="Sistema a Chiusura Automatica"
+                    baseWeight={500}
+                    accentWeight={700}
+                  />
+                </h3>
+              </div>
+              <p className="text-gray-600 mb-4">
+                <AccentedText
+                  text="Brevetto esclusivo per un sistema di chiusura che si attiva automaticamente quando la porta viene accostata, senza necessità di girare la chiave."
+                  baseWeight={300}
+                  accentWeight={500}
+                />
+              </p>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-500">Brevetto n° IT1234567</span>
+                <span className="bg-[var(--marsilii-primary)] text-white text-xs px-3 py-1 rounded-full">1989</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="bg-white rounded-lg shadow-md p-6 flex-1"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 10 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <Shield
+                    className="text-[var(--marsilii-primary)]"
+                    size={28}
+                  />
+                </motion.div>
+                <h3 className="font-semibold text-[var(--marsilii-primary)] text-xl">
+                  <AccentedText
+                    text="Serratura di Alta Sicurezza"
+                    baseWeight={500}
+                    accentWeight={700}
+                  />
+                </h3>
+              </div>
+              <p className="text-gray-600 mb-4">
+                <AccentedText
+                  text="Sistema brevettato di serratura a doppia mappa con chiave protetta e meccanismo anti-manipolazione per la massima sicurezza."
+                  baseWeight={300}
+                  accentWeight={500}
+                />
+              </p>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-500">Brevetto n° IT7654321</span>
+                <span className="bg-[var(--marsilii-primary)] text-white text-xs px-3 py-1 rounded-full">1995</span>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            className="text-center mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <Link href="/brevetti">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  className="text-[var(--marsilii-primary)] border-[var(--marsilii-primary)] font-light"
+                  variant="bordered"
+                  radius="md"
+                >
+                  Scopri tutti i brevetti
+                </Button>
+              </motion.div>
+            </Link>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Sezione Contatti con animazioni */}
+      <motion.div
+        className="py-16 px-4"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <div className="max-w-[1200px] mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-[var(--marsilii-primary)] mb-4">
+              <AccentedText
+                text="Contattaci"
+                baseWeight={600}
+                accentWeight={800}
+              />
+            </h2>
+            <p className="text-lg text-gray-600 max-w-[800px] mx-auto">
+              <AccentedText
+                text="I nostri esperti sono a disposizione per aiutarti a scegliere la soluzione più adatta alle tue esigenze"
+                baseWeight={300}
+                accentWeight={500}
+              />
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div
+              className="bg-white rounded-lg shadow-md p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="flex flex-col items-center text-center gap-4">
+                <motion.div
+                  className="w-16 h-16 rounded-full bg-[var(--marsilii-background-secondary)] flex items-center justify-center"
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                  }}
+                  transition={{ type: "spring" }}
+                >
+                  <MapPin size={28} />
+                </motion.div>
+                <h3 className="font-semibold text-[var(--marsilii-primary)] text-xl">
+                  <AccentedText
+                    text="Sede Principale"
+                    baseWeight={500}
+                    accentWeight={700}
+                  />
+                </h3>
+                <div className="text-gray-600">
+                  <p>Via Salara Vecchia, 136</p>
+                  <p>65015 Montesilvano (PE)</p>
+                  <p>Italia</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="bg-white rounded-lg shadow-md p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="flex flex-col items-center text-center gap-4">
+                <motion.div
+                  className="w-16 h-16 rounded-full bg-[var(--marsilii-background-secondary)] flex items-center justify-center"
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                  }}
+                  transition={{ type: "spring" }}
+                >
+                  <Phone size={28} />
+                </motion.div>
+                <h3 className="font-semibold text-[var(--marsilii-primary)] text-xl">
+                  <AccentedText
+                    text="Contatti Diretti"
+                    baseWeight={500}
+                    accentWeight={700}
+                  />
+                </h3>
+                <div className="text-gray-600">
+                  <p>Tel: +39 085 4452103</p>
+                  <p>Fax: +39 085 4456833</p>
+                  <p>Email: info@marsilii.it</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="bg-white rounded-lg shadow-md p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <div className="flex flex-col items-center text-center gap-4">
+                <motion.div
+                  className="w-16 h-16 rounded-full bg-[var(--marsilii-background-secondary)] flex items-center justify-center"
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+                  }}
+                  transition={{ type: "spring" }}
+                >
+                  <Clock3 size={28} />
+                </motion.div>
+                <h3 className="font-semibold text-[var(--marsilii-primary)] text-xl">
+                  <AccentedText
+                    text="Orari di Apertura"
+                    baseWeight={500}
+                    accentWeight={700}
+                  />
+                </h3>
+                <div className="text-gray-600">
+                  <p>Lun - Ven: 8:30 - 12:30, 14:30 - 18:30</p>
+                  <p>Sabato: 8:30 - 12:30</p>
+                  <p>Domenica: Chiuso</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            className="text-center mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <Link href="/contact">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  className="bg-[var(--marsilii-primary)] text-white font-light"
+                  radius="md"
+                >
+                  Contattaci
+                </Button>
+              </motion.div>
+            </Link>
+          </motion.div>
         </div>
       </motion.div>
     </div>

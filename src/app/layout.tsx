@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it">
-      <body className="overflow-x-hidden">
+      <body className="overflow-x-hidden" suppressHydrationWarning>
         <HeroUI>
           <Header />
           <main className="pt-20">{children}</main>
