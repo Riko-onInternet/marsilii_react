@@ -4,9 +4,19 @@ import { useParams } from "next/navigation";
 import Hero from "@/components/hero";
 import { Button, Breadcrumbs, BreadcrumbItem } from "@heroui/react";
 import { getProductBySlug, productCategories } from "@/data/products";
+import { downloadableDocuments } from "@/data/documents";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Phone, Mail, Shield, Award, Settings } from "lucide-react";
+import {
+  ArrowLeft,
+  Phone,
+  Mail,
+  Shield,
+  Award,
+  Settings,
+  FileText,
+  Download,
+} from "lucide-react";
 
 // Importazioni di Framer Motion
 import { motion, useInView } from "framer-motion";
@@ -24,18 +34,63 @@ export default function ProductDetailPage() {
   const breadcrumbRef = useRef(null);
   const productInfoRef = useRef(null);
   const additionalInfoRef = useRef(null);
+  const patentsRef = useRef(null);
   const relatedProductsRef = useRef(null);
-  
+
   // Controllo quando gli elementi entrano nel viewport
-  const isBreadcrumbInView = useInView(breadcrumbRef, { once: true, amount: 0.2 });
-  const isProductInfoInView = useInView(productInfoRef, { once: true, amount: 0.1 });
-  const isAdditionalInfoInView = useInView(additionalInfoRef, { once: true, amount: 0.2 });
-  const isRelatedProductsInView = useInView(relatedProductsRef, { once: true, amount: 0.1 });
+  const isBreadcrumbInView = useInView(breadcrumbRef, {
+    once: true,
+    amount: 0.2,
+  });
+  const isProductInfoInView = useInView(productInfoRef, {
+    once: true,
+    amount: 0.1,
+  });
+  const isAdditionalInfoInView = useInView(additionalInfoRef, {
+    once: true,
+    amount: 0.2,
+  });
+  const isPatentsInView = useInView(patentsRef, { once: true, amount: 0.2 });
+  const isRelatedProductsInView = useInView(relatedProductsRef, {
+    once: true,
+    amount: 0.1,
+  });
+
+  // Mappatura prodotti -> documenti brevetti
+  const getProductPatents = (productSlug: string) => {
+    switch (productSlug) {
+      case "porta-estro":
+        return {
+          title: "Certificazioni Porta Blindata Linea Estro",
+          documents: downloadableDocuments.filter((doc) =>
+            doc.fileUrl.includes("/doc/a1/")
+          ),
+        };
+      case "porta-estro-zelo":
+        return {
+          title: "Certificazioni Porta Blindata Linea Estro - Finitura Zelo",
+          documents: downloadableDocuments.filter((doc) =>
+            doc.fileUrl.includes("/doc/a2/")
+          ),
+        };
+      case "porta-ei120-tagliafuoco":
+        return {
+          title: "Certificazioni Porta Blindata Tagliafuoco EI 120",
+          documents: downloadableDocuments.filter((doc) =>
+            doc.fileUrl.includes("/doc/a3/")
+          ),
+        };
+      default:
+        return null; // Nessun brevetto per questo prodotto
+    }
+  };
+
+  const productPatents = getProductPatents(productSlug);
 
   if (!product || !category) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <motion.div 
+        <motion.div
           className="text-center"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -45,10 +100,7 @@ export default function ProductDetailPage() {
             Prodotto non trovato
           </h1>
           <Link href="/products">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 className="bg-[var(--marsilii-primary)] text-white font-light"
                 radius="md"
@@ -64,18 +116,16 @@ export default function ProductDetailPage() {
 
   return (
     <div>
-      <Hero
-        title={product.name}
-        size="sm"
-        src={product.image}
-      />
+      <Hero title={product.name} size="sm" src={product.image} />
 
       {/* Breadcrumb */}
-      <motion.div 
+      <motion.div
         ref={breadcrumbRef}
         className="py-6 px-4 bg-[var(--marsilii-background-secondary)]"
         initial={{ opacity: 0, y: -10 }}
-        animate={isBreadcrumbInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+        animate={
+          isBreadcrumbInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }
+        }
         transition={{ duration: 0.5 }}
       >
         <div className="max-w-[1200px] mx-auto">
@@ -126,7 +176,7 @@ export default function ProductDetailPage() {
       </motion.div>
 
       {/* Dettagli Prodotto */}
-      <motion.div 
+      <motion.div
         ref={productInfoRef}
         className="py-16 px-4"
         initial={{ opacity: 0 }}
@@ -138,11 +188,15 @@ export default function ProductDetailPage() {
             {/* Immagine */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
-              animate={isProductInfoInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              animate={
+                isProductInfoInView
+                  ? { opacity: 1, x: 0 }
+                  : { opacity: 0, x: -30 }
+              }
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               {product.image ? (
-                <motion.div 
+                <motion.div
                   className="relative aspect-square bg-gray-100 overflow-hidden"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
@@ -161,7 +215,10 @@ export default function ProductDetailPage() {
                       animate={{ rotate: [0, 10, 0] }}
                       transition={{ repeat: Infinity, duration: 3 }}
                     >
-                      <Shield size={64} className="mx-auto mb-4 text-gray-400" />
+                      <Shield
+                        size={64}
+                        className="mx-auto mb-4 text-gray-400"
+                      />
                     </motion.div>
                     <p className="text-gray-500">Immagine non disponibile</p>
                   </div>
@@ -172,16 +229,24 @@ export default function ProductDetailPage() {
             {/* Informazioni */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
-              animate={isProductInfoInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+              animate={
+                isProductInfoInView
+                  ? { opacity: 1, x: 0 }
+                  : { opacity: 0, x: 30 }
+              }
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <motion.div 
+              <motion.div
                 className="mb-6"
                 initial={{ opacity: 0, y: -10 }}
-                animate={isProductInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+                animate={
+                  isProductInfoInView
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: -10 }
+                }
                 transition={{ duration: 0.4, delay: 0.3 }}
               >
-                <motion.span 
+                <motion.span
                   className="bg-[var(--marsilii-background-secondary)] text-[var(--marsilii-primary)] px-3 py-1 rounded-full text-sm font-medium"
                   whileHover={{ scale: 1.05 }}
                 >
@@ -189,19 +254,27 @@ export default function ProductDetailPage() {
                 </motion.span>
               </motion.div>
 
-              <motion.h1 
+              <motion.h1
                 className="text-3xl font-bold text-[var(--marsilii-primary)] mb-4"
                 initial={{ opacity: 0, y: -10 }}
-                animate={isProductInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+                animate={
+                  isProductInfoInView
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: -10 }
+                }
                 transition={{ duration: 0.4, delay: 0.4 }}
               >
                 {product.name}
               </motion.h1>
 
-              <motion.p 
+              <motion.p
                 className="text-lg text-gray-600 mb-8"
                 initial={{ opacity: 0, y: -10 }}
-                animate={isProductInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+                animate={
+                  isProductInfoInView
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: -10 }
+                }
                 transition={{ duration: 0.4, delay: 0.5 }}
               >
                 {product.description}
@@ -209,10 +282,14 @@ export default function ProductDetailPage() {
 
               {/* Caratteristiche */}
               {product.specifications && product.specifications.length > 0 && (
-                <motion.div 
+                <motion.div
                   className="mb-8"
                   initial={{ opacity: 0, y: 10 }}
-                  animate={isProductInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                  animate={
+                    isProductInfoInView
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 10 }
+                  }
                   transition={{ duration: 0.4, delay: 0.6 }}
                 >
                   <h3 className="text-xl font-semibold text-[var(--marsilii-primary)] mb-4 flex items-center gap-2">
@@ -226,18 +303,29 @@ export default function ProductDetailPage() {
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {product.specifications.map((spec, index) => (
-                      <motion.div 
-                        key={index} 
+                      <motion.div
+                        key={index}
                         className="flex items-center gap-2"
                         initial={{ opacity: 0, x: -10 }}
-                        animate={isProductInfoInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                        transition={{ duration: 0.3, delay: 0.6 + index * 0.05 }}
+                        animate={
+                          isProductInfoInView
+                            ? { opacity: 1, x: 0 }
+                            : { opacity: 0, x: -10 }
+                        }
+                        transition={{
+                          duration: 0.3,
+                          delay: 0.6 + index * 0.05,
+                        }}
                         whileHover={{ x: 5 }}
                       >
-                        <motion.div 
+                        <motion.div
                           className="w-2 h-2 bg-[var(--marsilii-primary)] rounded-full"
                           animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ repeat: Infinity, duration: 2, delay: index * 0.1 }}
+                          transition={{
+                            repeat: Infinity,
+                            duration: 2,
+                            delay: index * 0.1,
+                          }}
                         ></motion.div>
                         <span className="text-gray-700 w-full">{spec}</span>
                       </motion.div>
@@ -248,10 +336,14 @@ export default function ProductDetailPage() {
 
               {/* Certificazioni */}
               {product.certifications && product.certifications.length > 0 && (
-                <motion.div 
+                <motion.div
                   className="mb-8"
                   initial={{ opacity: 0, y: 10 }}
-                  animate={isProductInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+                  animate={
+                    isProductInfoInView
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 10 }
+                  }
                   transition={{ duration: 0.4, delay: 0.7 }}
                 >
                   <h3 className="text-xl font-semibold text-[var(--marsilii-primary)] mb-4 flex items-center gap-2">
@@ -269,7 +361,11 @@ export default function ProductDetailPage() {
                         key={index}
                         className="bg-green-100 text-green-800 px-3 py-2 font-medium"
                         initial={{ opacity: 0, scale: 0.9 }}
-                        animate={isProductInfoInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                        animate={
+                          isProductInfoInView
+                            ? { opacity: 1, scale: 1 }
+                            : { opacity: 0, scale: 0.9 }
+                        }
                         transition={{ duration: 0.3, delay: 0.7 + index * 0.1 }}
                         whileHover={{ scale: 1.05 }}
                       >
@@ -281,10 +377,14 @@ export default function ProductDetailPage() {
               )}
 
               {/* Azioni */}
-              <motion.div 
+              <motion.div
                 className="flex flex-col sm:flex-row gap-4"
                 initial={{ opacity: 0, y: 20 }}
-                animate={isProductInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                animate={
+                  isProductInfoInView
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 20 }
+                }
                 transition={{ duration: 0.5, delay: 0.8 }}
               >
                 <Link href="/contact">
@@ -325,19 +425,25 @@ export default function ProductDetailPage() {
       </motion.div>
 
       {/* Informazioni Aggiuntive */}
-      <motion.div 
+      <motion.div
         ref={additionalInfoRef}
         className="py-16 px-4 bg-[var(--marsilii-background-secondary)]"
         initial={{ opacity: 0, y: 30 }}
-        animate={isAdditionalInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        animate={
+          isAdditionalInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+        }
         transition={{ duration: 0.6 }}
       >
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div 
+            <motion.div
               className="text-center"
               initial={{ opacity: 0, y: 20 }}
-              animate={isAdditionalInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              animate={
+                isAdditionalInfoInView
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 20 }
+              }
               transition={{ duration: 0.5, delay: 0.1 }}
               whileHover={{ y: -10 }}
             >
@@ -358,10 +464,14 @@ export default function ProductDetailPage() {
                 secondo i più alti standard di qualità
               </p>
             </motion.div>
-            <motion.div 
+            <motion.div
               className="text-center"
               initial={{ opacity: 0, y: 20 }}
-              animate={isAdditionalInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              animate={
+                isAdditionalInfoInView
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 20 }
+              }
               transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{ y: -10 }}
             >
@@ -383,17 +493,18 @@ export default function ProductDetailPage() {
                 un&apos;installazione perfetta e sicura
               </p>
             </motion.div>
-            <motion.div 
+            <motion.div
               className="text-center"
               initial={{ opacity: 0, y: 20 }}
-              animate={isAdditionalInfoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              animate={
+                isAdditionalInfoInView
+                  ? { opacity: 1, y: 0 }
+                  : { opacity: 0, y: 20 }
+              }
               transition={{ duration: 0.5, delay: 0.3 }}
               whileHover={{ y: -10 }}
             >
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                 <Phone
                   className="mx-auto mb-4 text-[var(--marsilii-primary)]"
                   size={48}
@@ -411,8 +522,134 @@ export default function ProductDetailPage() {
         </div>
       </motion.div>
 
+      {/* Sezione Brevetti e Certificazioni - Solo se ci sono brevetti per questo prodotto */}
+      {productPatents && productPatents.documents.length > 0 && (
+        <motion.div
+          ref={patentsRef}
+          className="py-16 px-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={
+            isPatentsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+          }
+          transition={{ duration: 0.6 }}
+        >
+          <div className="max-w-[1200px] mx-auto">
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: -20 }}
+              animate={
+                isPatentsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }
+              }
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-3xl font-bold text-[var(--marsilii-primary)] mb-4">
+                Brevetti e Certificazioni
+              </h2>
+              <p className="text-lg text-gray-600 max-w-[800px] mx-auto">
+                Documentazione tecnica e certificazioni per {product.name}
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={
+                isPatentsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+              }
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {productPatents.documents.map((doc, index) => (
+                  <motion.div
+                    key={index}
+                    className="bg-white shadow-md hover:shadow-lg transition-shadow duration-300 p-6 border border-gray-100 h-max"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={
+                      isPatentsInView
+                        ? { opacity: 1, y: 0 }
+                        : { opacity: 0, y: 20 }
+                    }
+                    transition={{ duration: 0.5 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <motion.div
+                        whileHover={{ scale: 1.1, rotate: 10 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <FileText
+                          className="text-[var(--marsilii-primary)]"
+                          size={24}
+                        />
+                      </motion.div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-[var(--marsilii-primary)] text-lg">
+                          {doc.name}
+                        </h4>
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                          <span>{doc.fileType}</span>
+                          <span>•</span>
+                          <span>{doc.fileSize}</span>
+                          <span>•</span>
+                          <span>{doc.lastUpdated}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-gray-600 mb-4 text-sm">
+                      {doc.description}
+                    </p>
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Button
+                        as="a"
+                        href={doc.fileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-[var(--marsilii-primary)] text-white font-light"
+                        radius="md"
+                        startContent={<Download size={16} />}
+                      >
+                        Scarica Documento
+                      </Button>
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Link alla pagina completa dei brevetti */}
+            <motion.div
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={
+                isPatentsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+              }
+              transition={{ duration: 0.5 }}
+            >
+              <Link href="/brevetti">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    className="border-[var(--marsilii-primary)] text-[var(--marsilii-primary)] font-light"
+                    radius="md"
+                    startContent={<Award size={16} />}
+                    variant="bordered"
+                  >
+                    Vedi Tutti i Brevetti e Certificazioni
+                  </Button>
+                </motion.div>
+              </Link>
+            </motion.div>
+          </div>
+        </motion.div>
+      )}
+
       {/* Prodotti Correlati */}
-      <motion.div 
+      <motion.div
         ref={relatedProductsRef}
         className="py-16 px-4"
         initial={{ opacity: 0 }}
@@ -420,10 +657,14 @@ export default function ProductDetailPage() {
         transition={{ duration: 0.6 }}
       >
         <div className="max-w-[1200px] mx-auto">
-          <motion.h2 
+          <motion.h2
             className="text-3xl font-bold text-[var(--marsilii-primary)] mb-8 text-center"
             initial={{ opacity: 0, y: -20 }}
-            animate={isRelatedProductsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+            animate={
+              isRelatedProductsInView
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: -20 }
+            }
             transition={{ duration: 0.5 }}
           >
             Altri Prodotti della Categoria
@@ -437,12 +678,16 @@ export default function ProductDetailPage() {
                   key={relatedProduct.id}
                   className="bg-white shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100"
                   initial={{ opacity: 0, y: 30 }}
-                  animate={isRelatedProductsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  animate={
+                    isRelatedProductsInView
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 30 }
+                  }
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                   whileHover={{ y: -10 }}
                 >
                   {relatedProduct.image && (
-                    <motion.div 
+                    <motion.div
                       className="relative h-32 bg-gray-100"
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.3 }}
@@ -490,7 +735,11 @@ export default function ProductDetailPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
-                animate={isRelatedProductsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                animate={
+                  isRelatedProductsInView
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 20 }
+                }
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
                 <Button
